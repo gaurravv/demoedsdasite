@@ -1,7 +1,7 @@
 {
-  "project": "mydemoedssite",
+  "project": "demoedsdasite",
   "editUrlLabel": "Document Authoring",
   "editUrlPattern": "https://da.live/edit#/{{org}}/{{site}}{{pathname}}",
-  "previewHost": "main--mydemoedssite--gaurravv.aem.page",
-  "liveHost": "main--mydemoedssite--gaurravv.aem.live"
+  "previewHost": "main--demoedsdasite--gaurravv.aem.page",
+  "liveHost": "main--demoedsdasite--gaurravv.aem.live"
 }
