@@ -1,1 +1,10 @@
 helix-importer-ui
+
+# Migration validation infrastructure (gitignored; not part of the shipped project)
+migration-work
+
+# Vendored experimentation plugin ships its own package.json, ESLint config, and
+# CI. Its test infra imports dev-only deps (@playwright/test, monocart-coverage-reports)
+# that the root `npm ci` does not install, so linting them here fails import/no-unresolved.
+plugins/experimentation/tests
+plugins/experimentation/playwright.config.js
