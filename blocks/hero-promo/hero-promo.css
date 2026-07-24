@@ -36,6 +36,7 @@
 }
 
 /* Row 2: content card overlaps the bottom of the image */
+/* stylelint-disable-next-line no-descending-specificity */
 .hero-promo > div:last-child {
   position: relative;
   z-index: 1;

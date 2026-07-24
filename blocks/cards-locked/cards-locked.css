@@ -8,8 +8,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  column-gap: 28px;
-  row-gap: 40px;
+  gap: 40px 28px;
 }
 
 /* Each locked teaser: text stacked ABOVE the image (matches source order) */

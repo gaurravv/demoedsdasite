@@ -29,17 +29,17 @@
   margin: 7px 0;
 }
 
-.cards-team .cards-team-card-image picture,
-.cards-team .cards-team-card-image img {
-  display: block;
-}
-
 .cards-team > ul > li img {
   width: 164px;
   height: 164px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.cards-team .cards-team-card-image picture,
+.cards-team .cards-team-card-image img {
+  display: block;
 }
 
 /* card text body */

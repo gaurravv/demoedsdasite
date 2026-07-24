@@ -17,6 +17,9 @@ import {
   toCamelCase,
 } from './aem.js';
 
+// Origin of the Nx experimentation host on Document Authoring, used by sidekick.js
+export const NX_ORIGIN = 'https://da.live/nx';
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element

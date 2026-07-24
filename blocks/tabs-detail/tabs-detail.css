@@ -90,6 +90,7 @@
   color: var(--text-color);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .tabs-detail .tabs-detail-panel p {
   margin: 0 0 13.5px;
   font-family: var(--body-font-family);
@@ -103,11 +104,13 @@
 }
 
 /* --- Images: EDS wraps them in <p>; render full width, block-level --- */
+/* stylelint-disable no-descending-specificity */
 .tabs-detail .tabs-detail-panel p:has(img),
 .tabs-detail .tabs-detail-panel p:has(picture) {
   margin: 7px 0;
   line-height: 0;
 }
+/* stylelint-enable no-descending-specificity */
 
 .tabs-detail .tabs-detail-panel picture,
 .tabs-detail .tabs-detail-panel img {
