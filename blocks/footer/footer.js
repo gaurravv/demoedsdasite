@@ -6,12 +6,13 @@ import { loadFragment } from '../fragment/fragment.js';
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment — dual-fetch: local (/content/footer) then DA/EDS (metadata path)
+  // load footer as fragment — metadata override, else /footer (root, works on DA/EDS + local),
+  // falling back to /content/footer for local content-tree layouts.
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/content/footer';
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
   let fragment = await loadFragment(footerPath);
   if (!fragment || !fragment.firstElementChild) {
-    fragment = await loadFragment('/footer');
+    fragment = await loadFragment('/content/footer');
   }
 
   // decorate footer DOM
@@ -32,11 +33,6 @@ export default async function decorate(block) {
     const container = brandLink.closest('.button-container');
     if (container) container.className = '';
   }
-
-  // resolve fragment-relative image paths (images/x.svg) to the content root
-  footer.querySelectorAll('img[src^="images/"]').forEach((img) => {
-    img.setAttribute('src', `/content/${img.getAttribute('src')}`);
-  });
 
   block.append(footer);
 }
