@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/beervana-portland.html",
+  "path": "us/en/adventures/beervana-portland",
+  "timestamp": "2026-07-24T14:10:00.717Z",
+  "title": "Beervana in Portland",
+  "template": "adventure-detail",
+  "blocks": [
+    "carousel-gallery",
+    "carousel-gallery",
+    "columns-spec",
+    "tabs-detail"
+  ]
+}

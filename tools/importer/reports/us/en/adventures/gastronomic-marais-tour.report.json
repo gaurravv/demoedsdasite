@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/gastronomic-marais-tour.html",
+  "path": "us/en/adventures/gastronomic-marais-tour",
+  "timestamp": "2026-07-24T14:10:31.137Z",
+  "title": "Gastronomic Marais Tour",
+  "template": "adventure-detail",
+  "blocks": [
+    "carousel-gallery",
+    "carousel-gallery",
+    "columns-spec",
+    "tabs-detail"
+  ]
+}

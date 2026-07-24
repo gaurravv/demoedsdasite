@@ -1,0 +1,30 @@
+:root {
+  /* Typography */
+  --heading-font-family: "Asar", georgia, "Times New Roman", times, serif;
+  --body-font-family: "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif;
+
+  /* Colors — classic WKND palette */
+  --background-color: #fff;
+  --text-color: #000;
+  --text-muted-color: #2b2b2b;
+  --link-color: #2b6656;
+  --link-hover-color: #1a4034;
+  --accent-color: #2b6656;
+  --button-background-color: #2b6656;
+  --button-text-color: #fff;
+  --light-color: #f7f7f7;
+  --dark-color: #000;
+
+  /* Spacing */
+  --section-padding: 40px;
+  --content-max-width: 1200px;
+  --nav-height: 64px;
+
+  /* Heading sizes (desktop) */
+  --heading-size-xxl: 48px;
+  --heading-size-xl: 36px;
+  --heading-size-l: 24px;
+  --heading-size-m: 20px;
+  --heading-size-s: 18px;
+  --heading-size-xs: 16px;
+}

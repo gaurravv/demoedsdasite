@@ -1,0 +1,39 @@
+{
+  "variantName": "accordion-faq",
+  "baseBlock": "accordion",
+  "version": "1.0.0",
+  "created": "2026-07-24T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/faqs.html",
+    "originPage": "FAQs page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "faq",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "question (summary) + collapsible answer panel",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "itemCount": 8
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "FAQ / question-and-answer lists",
+      "expand/collapse help content",
+      "any vertical list of togglable question + answer pairs"
+    ],
+    "notSuitableFor": [
+      "tabbed content switchers (use tabs)",
+      "always-visible content that should not collapse"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/faqs"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-24T00:00:00.000Z"
+  }
+}

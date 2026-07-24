@@ -17,6 +17,9 @@ import {
   toCamelCase,
 } from './aem.js';
 
+// Origin of the Nx experimentation host on Document Authoring, used by sidekick.js
+export const NX_ORIGIN = 'https://da.live/nx';
+
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
@@ -24,6 +27,11 @@ import {
 function buildHeroBlock(main) {
   const h1 = main.querySelector('h1');
   const picture = main.querySelector('picture');
+  // Skip auto-hero when the leading picture already belongs to an authored
+  // block (a classed div other than the section wrapper), e.g. carousel-gallery.
+  // Otherwise the block's first image would be stolen for the synthetic hero.
+  const ownerBlock = picture && picture.closest('div[class]:not(.section):not(.section-metadata)');
+  if (ownerBlock) return;
   // eslint-disable-next-line no-bitwise
   if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
@@ -121,10 +129,18 @@ function decorateSections(main) {
 }
 
 /**
+ * Moves authoring instrumentation attributes from one element to another.
+ * No-op in this project (no Universal Editor instrumentation), kept so block
+ * decorators that call it work unchanged.
+ * @param {Element} from source element
+ * @param {Element} to target element
+ */
+export function moveInstrumentation() {}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
-// eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);

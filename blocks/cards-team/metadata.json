@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-team",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-24T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/about-us.html",
+    "originPage": "About Us page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "grid",
+    "purpose": "team",
+    "imagePattern": "circular"
+  },
+  "contentPattern": {
+    "structure": "circular image + name + role + social links",
+    "buttonCount": 3,
+    "imageCount": 1,
+    "cardCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "team / contributor / staff member grids",
+      "people directories with photo + name + role + social links",
+      "author or guide listings on About/People pages"
+    ],
+    "notSuitableFor": [
+      "article/product teaser grids (use cards-teaser)",
+      "gated content previews (use cards-locked)",
+      "cards that need a body description or read-more CTA"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/about-us"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-24T00:00:00.000Z"
+  }
+}

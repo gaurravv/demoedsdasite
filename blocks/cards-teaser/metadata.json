@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-teaser",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-24T13:20:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en.html",
+    "originPage": "WKND homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "grid",
+    "purpose": "teaser",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title + description",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "cardCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "article teaser lists (magazine)",
+      "adventure/product teaser grids",
+      "any grid of image + title + description items linking to detail pages"
+    ],
+    "notSuitableFor": [
+      "text-only cards (use cards no-images variant)",
+      "single highlight item (use hero)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en", "/us/en/magazine", "/us/en/adventures"],
+    "reuseCount": 4,
+    "lastUsed": "2026-07-24T13:34:38.000Z",
+    "notes": "Homepage: Recent Articles list and Where do you want to go? adventures list. Magazine: All Articles list (5 article teaser cards). Adventures: Current Adventures grid (16 adventure cards, tab filter dropped)."
+  }
+}

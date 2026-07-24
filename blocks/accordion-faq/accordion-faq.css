@@ -1,0 +1,85 @@
+/* Block: accordion-faq — FAQ expand/collapse accordion
+   Layout/spacing/dividers extracted from source computed styles.
+   Colors mapped to brand.css (source live theme was an anomalous test palette). */
+
+.accordion-faq {
+  margin: 0;
+}
+
+/* --- Accordion item: divider-only, no boxes --- */
+.accordion-faq .accordion-faq-item {
+  border-bottom: 2px solid #ebebeb;
+}
+
+/* --- Question row (summary) --- */
+.accordion-faq .accordion-faq-item-label {
+  position: relative;
+  display: block;
+  padding: 13px 46px 13px 13px;
+  cursor: pointer;
+  list-style: none;
+  transition: background-color 0.2s;
+}
+
+.accordion-faq .accordion-faq-item-label::-webkit-details-marker {
+  display: none;
+}
+
+/* Question text (authored as a paragraph inside the summary) */
+.accordion-faq .accordion-faq-item-label p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s); /* 16px */
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.accordion-faq .accordion-faq-item-label:hover,
+.accordion-faq .accordion-faq-item-label:focus {
+  background-color: var(--light-color);
+}
+
+.accordion-faq .accordion-faq-item[open] .accordion-faq-item-label {
+  background-color: var(--light-color);
+}
+
+/* --- Chevron indicator (source used an icon-font glyph on the right) --- */
+.accordion-faq .accordion-faq-item-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  border: solid var(--accent-color);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-75%) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.accordion-faq .accordion-faq-item[open] .accordion-faq-item-label::after {
+  transform: translateY(-25%) rotate(-135deg);
+}
+
+/* --- Answer panel --- */
+.accordion-faq .accordion-faq-item-body {
+  padding: 7px 13px 13px;
+}
+
+.accordion-faq .accordion-faq-item-body p {
+  margin: 0 0 0.8em;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs); /* 14px */
+  line-height: 1.5; /* ~21px at 14px */
+  color: var(--text-muted-color);
+}
+
+.accordion-faq .accordion-faq-item-body p:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-faq .accordion-faq-item-body h3 {
+  margin-top: 0;
+}

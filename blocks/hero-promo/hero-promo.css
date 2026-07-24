@@ -1,0 +1,112 @@
+/* hero-promo -- WKND "imagebottom" teaser:
+   full-width image on top, white content card overlapping upward, left-aligned.
+   Layout/spacing extracted from source computed styles.
+   Colors use brand.css variables (source live theme is an anomalous red/yellow test theme). */
+
+/* Break the block out of the section's max-width container so the image is full width */
+.hero-promo-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.hero-promo {
+  display: block;
+  color: var(--text-color);
+}
+
+/* Row 1: image cell */
+.hero-promo > div:first-child {
+  margin: 0;
+}
+
+.hero-promo > div:first-child > div {
+  margin: 0;
+  line-height: 0;
+}
+
+.hero-promo picture {
+  display: block;
+}
+
+.hero-promo img {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+/* Row 2: content card overlaps the bottom of the image */
+/* stylelint-disable-next-line no-descending-specificity */
+.hero-promo > div:last-child {
+  position: relative;
+  z-index: 1;
+  max-width: var(--content-max-width, 1200px);
+  margin: -60px auto 0;
+  padding: 0 24px;
+}
+
+.hero-promo > div:last-child > div {
+  background-color: var(--background-color);
+  padding: 24px 28px 28px;
+  text-align: left;
+}
+
+.hero-promo h2 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl); /* 36px mobile */
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.hero-promo p {
+  margin: 12px 0 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 18px */
+  line-height: 1.75;
+  color: var(--text-muted-color);
+}
+
+.hero-promo .button-container {
+  margin: 18px 0 0;
+}
+
+.hero-promo a.button:any-link {
+  margin: 0;
+  padding: 14px 35px;
+  border: none;
+  border-radius: 0;
+  font-size: var(--body-font-size-xs); /* 14px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+}
+
+.hero-promo a.button:hover,
+.hero-promo a.button:focus {
+  background-color: var(--link-hover-color);
+  color: #fff;
+}
+
+@media (width >= 900px) {
+  .hero-promo img {
+    height: 640px;
+  }
+
+  .hero-promo > div:last-child {
+    margin-top: -180px;
+    padding: 0 24px;
+  }
+
+  .hero-promo > div:last-child > div {
+    padding: 18px 28px 28px;
+  }
+
+  .hero-promo h2 {
+    font-size: 36px; /* source h2 desktop */
+  }
+}

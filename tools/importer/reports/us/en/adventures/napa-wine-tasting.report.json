@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/napa-wine-tasting.html",
+  "path": "us/en/adventures/napa-wine-tasting",
+  "timestamp": "2026-07-24T14:10:36.057Z",
+  "title": "Napa Wine Tasting",
+  "template": "adventure-detail",
+  "blocks": [
+    "carousel-gallery",
+    "carousel-gallery",
+    "columns-spec",
+    "tabs-detail"
+  ]
+}

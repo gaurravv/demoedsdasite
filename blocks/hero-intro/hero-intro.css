@@ -1,0 +1,91 @@
+/* Block: hero-intro — overlay hero teaser
+   Full-bleed landscape image with a white content box overlaying the lower
+   portion, containing a serif heading and body text (left-aligned).
+   Layout/spacing/image treatment extracted from source computed styles.
+   Colors mapped to brand.css (source test-theme reds are intentionally dropped). */
+
+/* Let the block break out of the section's max-width so the image is full-bleed */
+.hero-intro-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.hero-intro {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Row 1 = image cell: fills the whole block as a full-bleed backdrop */
+.hero-intro > div:first-child {
+  width: 100%;
+  margin: 0;
+}
+
+.hero-intro > div:first-child picture {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.hero-intro > div:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2.25;
+  object-fit: cover;
+}
+
+/* Row 2 = text cell: white box overlapping the lower part of the image */
+.hero-intro > div:last-child {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--content-max-width, 1200px);
+  margin: -140px auto 0;
+  padding: 0 24px;
+}
+
+.hero-intro > div:last-child > div {
+  box-sizing: border-box;
+  background-color: var(--background-color, #fff);
+  padding: 28px 28px 40px;
+}
+
+.hero-intro h2 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl, 36px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.hero-intro p {
+  margin: 12px 0 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m, 18px);
+  line-height: 1.75;
+  color: var(--text-muted-color);
+}
+
+@media (width >= 900px) {
+  .hero-intro > div:last-child {
+    /* pull the white box up so it overlaps the lower ~28% of the image */
+    margin-top: -180px;
+    padding: 0 32px;
+  }
+
+  .hero-intro > div:last-child > div {
+    /* box does not span full content width — offset from the right edge,
+       leaving image visible on the right (matches source ~1192px box) */
+    max-width: 100%;
+    padding: 32px 40px 44px;
+  }
+
+  .hero-intro h2 {
+    font-size: var(--heading-size-xl, 36px);
+  }
+}
