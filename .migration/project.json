@@ -1,0 +1,11 @@
+{
+  "previewOrg": "gaurravv",
+  "previewSite": "demoedsdasite",
+  "type": "da",
+  "contentHostUrl": "https://content.da.live/gaurravv/demoedsdasite/",
+  "sites": {
+    "demoedsdasite": {
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

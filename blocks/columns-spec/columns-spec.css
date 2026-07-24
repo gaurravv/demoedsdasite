@@ -1,0 +1,49 @@
+/* Block: columns-spec — activity spec key/value panel (WKND) */
+/* Layout/spacing/typography extracted from source computed styles. */
+/* Colors mapped to brand.css variables (source rendered an anomalous test theme). */
+
+.columns-spec {
+  margin: 18px 0;
+}
+
+/* Each row = one label/value pair, stacked vertically (label above value). */
+.columns-spec > div {
+  display: block;
+  padding: 0 18px;
+  margin: 0 0 22.5px;
+}
+
+.columns-spec > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Reset default paragraph styling for the cell content. */
+.columns-spec > div > div > p {
+  margin: 0;
+  line-height: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
+
+/* Label (first cell) — small uppercase, brand accent. */
+.columns-spec > div > div:first-child {
+  color: var(--accent-color);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 12px 0 0;
+}
+
+/* Value (second cell) — bolder, muted text color. */
+.columns-spec > div > div:last-child {
+  color: var(--text-muted-color);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-transform: uppercase;
+  padding: 7px 0 0;
+}

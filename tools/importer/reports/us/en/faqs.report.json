@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/faqs.html",
+  "path": "us/en/faqs",
+  "timestamp": "2026-07-24T14:09:09.824Z",
+  "title": "FAQs",
+  "template": "content-page",
+  "blocks": [
+    "accordion-faq"
+  ]
+}

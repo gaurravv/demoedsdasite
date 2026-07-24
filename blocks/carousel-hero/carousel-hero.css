@@ -1,0 +1,219 @@
+/* Block: carousel-hero -- WKND hero carousel design
+   Layout/spacing/sizing extracted from source computed styles.
+   Colors mapped to brand.css variables (source theme colors are anomalous). */
+
+/* Full-bleed: escape the EDS section max-width container */
+.carousel-hero-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.carousel-hero .carousel-hero-slides-container {
+  position: relative;
+}
+
+.carousel-hero .carousel-hero-slides,
+.carousel-hero .carousel-hero-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-hero .carousel-hero-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-hero .carousel-hero-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-hero .carousel-hero-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  position: relative;
+  width: 100%;
+}
+
+/* --- Full-bleed hero image --- */
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image {
+  width: 100%;
+}
+
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture {
+  display: block;
+}
+
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture > img {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+/* --- White content card floating over the bottom of the image --- */
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+  position: relative;
+  z-index: 1;
+  margin: -80px 16px 0;
+  padding: 24px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.carousel-hero .carousel-hero-slide-content h2 {
+  margin: 0 0 8px;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-size: var(--heading-font-size-xl);
+  line-height: 1.25;
+  color: var(--text-color);
+}
+
+.carousel-hero .carousel-hero-slide-content p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  line-height: 1.75;
+  color: var(--text-muted-color);
+}
+
+/* CTA button: WKND solid rectangular uppercase button using brand colors */
+.carousel-hero .carousel-hero-slide-content .button-container {
+  margin: 18px 0 0;
+}
+
+.carousel-hero .carousel-hero-slide-content a.button:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+}
+
+.carousel-hero .carousel-hero-slide-content a.button:hover,
+.carousel-hero .carousel-hero-slide-content a.button:focus {
+  background-color: var(--link-hover-color);
+  color: var(--button-text-color);
+}
+
+/* --- Slide indicators (dots) centered below the card --- */
+.carousel-hero .carousel-hero-slide-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 12px;
+  line-height: 0;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(0 0 0 / 30%);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button:disabled,
+.carousel-hero .carousel-hero-slide-indicator button:hover,
+.carousel-hero .carousel-hero-slide-indicator button:focus-visible {
+  background-color: rgb(0 0 0 / 80%);
+}
+
+/* --- Prev/next navigation chevrons --- */
+.carousel-hero .carousel-hero-navigation-buttons {
+  position: absolute;
+  top: 160px;
+  transform: translateY(-50%);
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-hero .carousel-hero-navigation-buttons button {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(0 0 0 / 25%);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button:hover,
+.carousel-hero .carousel-hero-navigation-buttons button:focus-visible {
+  background-color: rgb(0 0 0 / 60%);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button::after {
+  display: block;
+  content: '';
+  border: 2px solid #fff;
+  border-bottom: 0;
+  border-left: 0;
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 2px);
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button.slide-next::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+  left: calc(50% - 2px);
+}
+
+/* --- Desktop --- */
+@media (width >= 900px) {
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture > img {
+    height: 640px;
+  }
+
+  /* Centered white card overlapping the bottom of the image */
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: -180px auto 0;
+    padding: 20px 28px 28px;
+  }
+
+  .carousel-hero .carousel-hero-slide-content h2 {
+    margin: 18px 0 0;
+    font-size: var(--heading-font-size-xl);
+    line-height: 1.5;
+  }
+
+  .carousel-hero .carousel-hero-slide-content p {
+    font-size: var(--body-font-size-m);
+  }
+
+  .carousel-hero .carousel-hero-navigation-buttons {
+    top: 320px;
+    left: 24px;
+    right: 24px;
+  }
+}

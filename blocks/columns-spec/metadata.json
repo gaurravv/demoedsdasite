@@ -1,0 +1,41 @@
+{
+  "variantName": "columns-spec",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-07-24T13:44:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/climbing-new-zealand.html",
+    "originPage": "adventure detail page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "spec",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "label + value pairs",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "rowCount": 6
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "activity/trip specification panels (Activity, Adventure Type, Trip Length, Group Size, Difficulty, Price)",
+      "labeled key/value metadata lists rendered as an aligned two-column spec sheet",
+      "product/trip attribute summaries in a side panel"
+    ],
+    "notSuitableFor": [
+      "repeating image + title + description items (use cards / cards-teaser)",
+      "free-form side-by-side rich content blocks (use vanilla columns pattern)",
+      "tabular numeric data requiring comparison across many rows/columns (use table)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures/climbing-new-zealand"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-24T13:44:00.000Z",
+    "notes": "NEW pattern for adventure-detail template. Each row = [label | value]. Renders the activity metadata panel that appears in the left column of the adventure detail body."
+  }
+}

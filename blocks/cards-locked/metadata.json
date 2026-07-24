@@ -1,0 +1,41 @@
+{
+  "variantName": "cards-locked",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-07-24T13:30:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine.html",
+    "originPage": "WKND Magazine landing page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "grid",
+    "purpose": "locked",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title + description + read more",
+    "buttonCount": 1,
+    "imageCount": 1,
+    "cardCount": 2
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "members-only / gated teaser cards",
+      "locked content previews where the CTA does not navigate until sign-in",
+      "premium/exclusive content teaser grids with a lock affordance"
+    ],
+    "notSuitableFor": [
+      "standard article/product teaser lists with live links (use cards-teaser)",
+      "single highlight item (use hero-promo)",
+      "text-only cards (use cards no-images variant)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-24T13:30:00.000Z",
+    "notes": "Members Only section: 'Alaskan Adventure' and 'Fly Fishing the Amazon' gated teasers. Distinguished from cards-teaser by locked/members-only treatment (lock overlay, non-navigating Read More)."
+  }
+}

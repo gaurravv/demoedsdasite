@@ -1,0 +1,41 @@
+{
+  "variantName": "carousel-gallery",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-07-24T13:44:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/climbing-new-zealand.html",
+    "originPage": "adventure detail page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "photo",
+    "density": "spacious",
+    "purpose": "gallery",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image only per slide",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "slideCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "full-width image-only hero galleries at the top of a detail page",
+      "rotating photo galleries with no overlaid heading/description/CTA",
+      "trip/adventure/product photo showcases"
+    ],
+    "notSuitableFor": [
+      "promotional carousels with heading + description + CTA per slide (use carousel-hero)",
+      "single featured item (use hero-promo / hero-intro)",
+      "grids of teaser cards (use cards-teaser)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures/climbing-new-zealand"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-24T13:44:00.000Z",
+    "notes": "Distinct from carousel-hero: image-only slides (no text/CTA), used as a photo gallery hero on adventure detail pages. carousel-hero is scoped to promotional sliders with image + heading + description + CTA per slide."
+  }
+}

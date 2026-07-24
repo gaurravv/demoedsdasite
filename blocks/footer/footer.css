@@ -1,20 +1,124 @@
 footer {
   background-color: var(--light-color);
+  font-family: var(--body-font-family);
   font-size: var(--body-font-size-xs);
+  color: var(--text-muted-color);
+}
+
+footer .footer {
+  padding: 40px 0;
 }
 
 footer .footer > div {
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
-}
-
-footer .footer p {
-  margin: 0;
+  max-width: var(--content-max-width, 1200px);
+  padding: 0 24px;
 }
 
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 40px 32px 24px;
+    padding: 0 32px;
   }
+}
+
+/* Brand */
+footer .footer .footer-brand {
+  margin-bottom: 24px;
+}
+
+footer .footer .footer-brand p {
+  margin: 0;
+}
+
+footer .footer .footer-brand a:any-link {
+  font-family: var(--heading-font-family);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* Footer nav */
+footer .footer .footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+footer .footer .footer-nav a:any-link {
+  color: var(--accent-color);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+footer .footer .footer-nav a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Social block */
+footer .footer .footer-social {
+  margin-bottom: 24px;
+}
+
+footer .footer .footer-social h4 {
+  margin: 0 0 12px;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+footer .footer .footer-social p {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+}
+
+footer .footer .footer-social a:any-link {
+  display: inline-flex;
+  color: var(--accent-color);
+}
+
+footer .footer .footer-social a:hover {
+  color: var(--link-hover-color);
+}
+
+footer .footer .footer-social img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Legal / copyright block */
+footer .footer .footer-legal {
+  border-top: 1px solid #ebebeb;
+  padding-top: 24px;
+}
+
+footer .footer .footer-legal p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted-color);
+}
+
+footer .footer .footer-legal p:first-child {
+  font-weight: 600;
+}
+
+footer .footer .footer-legal a:any-link {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+footer .footer .footer-legal a:hover {
+  color: var(--link-hover-color);
 }

@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-intro",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-07-24T13:34:38.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures.html",
+    "originPage": "adventures listing landing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "promo",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + description + image",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "intro promo sections with heading + text beside a large image on a light background",
+      "side-by-side (two-column) featured intro promos without a CTA",
+      "landing page intro banners where image sits alongside text (not as a background overlay)"
+    ],
+    "notSuitableFor": [
+      "full-bleed background-image heroes with overlaid text (use hero-promo)",
+      "repeating item grids (use cards / cards-teaser)",
+      "hero promos requiring a CTA over a photo background (use hero-promo)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures"],
+    "reuseCount": 1,
+    "lastUsed": "2026-07-24T13:34:38.000Z"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-promo",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-07-24T13:20:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en.html",
+    "originPage": "WKND homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "photo",
+    "density": "spacious",
+    "purpose": "promo",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "mid-page promo/highlight banners",
+      "single featured trip/offer callouts with a full-width background image",
+      "prominent heading + text + single CTA over an image"
+    ],
+    "notSuitableFor": [
+      "multiple repeating items (use cards or carousel)",
+      "text-only sections"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en", "/us/en/magazine"],
+    "reuseCount": 2,
+    "lastUsed": "2026-07-24T13:30:00.000Z",
+    "notes": "Homepage: Climbing New Zealand promo teaser. Magazine: Featured Article highlight (Camping in Western Australia) with 'Featured Article' eyebrow."
+  }
+}

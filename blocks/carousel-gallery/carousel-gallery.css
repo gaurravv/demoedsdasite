@@ -1,0 +1,176 @@
+/*
+ * carousel-gallery — WKND "mini" image gallery carousel
+ * Full-width rotating image band with a control bar below the image:
+ * centered indicator dots plus prev/next chevrons aligned to the right.
+ * Layout/spacing/sizing extracted from source .cmp-carousel--mini computed styles.
+ * Accent colors use brand.css variables (source live theme colors are anomalous).
+ */
+
+/* Break out of the section's 1200px max-width — source gallery is full-width. */
+.carousel-gallery-wrapper {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.carousel-gallery {
+  position: relative;
+}
+
+.carousel-gallery .carousel-gallery-slides-container {
+  position: relative;
+}
+
+.carousel-gallery .carousel-gallery-slides,
+.carousel-gallery .carousel-gallery-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Horizontal scroll-snap track of full-width slides. */
+.carousel-gallery .carousel-gallery-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-gallery .carousel-gallery-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-gallery .carousel-gallery-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  position: relative;
+  width: 100%;
+}
+
+/* Image-only slides: full-width fixed-height band, cropped with object-fit. */
+.carousel-gallery .carousel-gallery-slide .carousel-gallery-slide-image {
+  width: 100%;
+  line-height: 0;
+}
+
+.carousel-gallery .carousel-gallery-slide .carousel-gallery-slide-image picture {
+  display: block;
+}
+
+.carousel-gallery .carousel-gallery-slide .carousel-gallery-slide-image picture > img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  max-width: none;
+}
+
+/* No text content in the mini gallery — hide the (empty) content cell. */
+.carousel-gallery .carousel-gallery-slide .carousel-gallery-slide-content {
+  display: none;
+}
+
+/* ---- Control bar (below the image) ---- */
+
+/* Indicator dots: centered across the full width, sitting just below image. */
+.carousel-gallery .carousel-gallery-slide-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0 14px;
+  margin: 9px 0 0;
+  padding: 0;
+  background-color: transparent;
+  line-height: 0;
+}
+
+.carousel-gallery .carousel-gallery-slide-indicator {
+  margin: 0;
+}
+
+.carousel-gallery .carousel-gallery-slide-indicator button {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(0 0 0 / 30%);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+/* Active / hovered dot uses the brand accent (source active dot is dark; we
+   distinguish the active state with the WKND accent teal). */
+.carousel-gallery .carousel-gallery-slide-indicator button:disabled,
+.carousel-gallery .carousel-gallery-slide-indicator button:hover,
+.carousel-gallery .carousel-gallery-slide-indicator button:focus-visible {
+  background-color: var(--accent-color);
+}
+
+/* Prev/next chevrons: small, aligned to the far right of the control bar,
+   overlapping the same row as the centered dots. */
+.carousel-gallery .carousel-gallery-navigation-buttons {
+  position: absolute;
+  right: 24px;
+  bottom: -27px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 1;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-gallery .carousel-gallery-navigation-buttons button {
+  position: relative;
+  width: 18px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.carousel-gallery .carousel-gallery-navigation-buttons button:hover,
+.carousel-gallery .carousel-gallery-navigation-buttons button:focus-visible {
+  background-color: transparent;
+}
+
+/* Chevron glyphs drawn with CSS borders, colored with brand accent. */
+.carousel-gallery .carousel-gallery-navigation-buttons button::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--text-color);
+  border-bottom: 0;
+  border-left: 0;
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.carousel-gallery .carousel-gallery-navigation-buttons button.slide-next::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.carousel-gallery .carousel-gallery-navigation-buttons button:hover::after,
+.carousel-gallery .carousel-gallery-navigation-buttons button:focus-visible::after {
+  border-color: var(--accent-color);
+}
+
+/* Reserve space below the image for the control bar so chevrons (positioned
+   below the image) are not clipped. */
+.carousel-gallery nav {
+  position: relative;
+  padding-bottom: 18px;
+}
+
+@media (width >= 900px) {
+  .carousel-gallery .carousel-gallery-slide .carousel-gallery-slide-image picture > img {
+    height: 400px;
+  }
+}

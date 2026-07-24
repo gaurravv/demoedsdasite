@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/surf-camp-costa-rica.html",
+  "path": "us/en/adventures/surf-camp-costa-rica",
+  "timestamp": "2026-07-24T14:10:52.976Z",
+  "title": "Surf Camp in Costa Rica",
+  "template": "adventure-detail",
+  "blocks": [
+    "carousel-gallery",
+    "carousel-gallery",
+    "columns-spec",
+    "tabs-detail"
+  ]
+}

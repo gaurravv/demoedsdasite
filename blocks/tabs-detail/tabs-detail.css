@@ -1,0 +1,131 @@
+/* Block: tabs-detail — layout/spacing/typography from source computed styles.
+   Source colors were an anomalous red test theme; mapped to brand.css variables. */
+
+/* --- Tablist (horizontal tab bar) --- */
+.tabs-detail .tabs-detail-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 18px 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* --- Tab buttons: reset global button styling, apply source tab treatment --- */
+.tabs-detail .tabs-detail-list button.tabs-detail-tab {
+  flex: 0 0 max-content;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--link-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: normal;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tabs-detail .tabs-detail-list button.tabs-detail-tab p {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+
+.tabs-detail .tabs-detail-list button.tabs-detail-tab:hover,
+.tabs-detail .tabs-detail-list button.tabs-detail-tab:focus {
+  background-color: transparent;
+  color: var(--link-hover-color);
+}
+
+/* --- Active tab: solid accent fill, white text (matches source) --- */
+.tabs-detail .tabs-detail-list button.tabs-detail-tab[aria-selected='true'] {
+  background-color: var(--accent-color);
+  color: #fff;
+  cursor: default;
+}
+
+.tabs-detail .tabs-detail-list button.tabs-detail-tab[aria-selected='true']:hover,
+.tabs-detail .tabs-detail-list button.tabs-detail-tab[aria-selected='true']:focus {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/* --- Tab panels: no border/padding on the source; content flows full width --- */
+.tabs-detail .tabs-detail-panel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  overflow: visible;
+}
+
+.tabs-detail .tabs-detail-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* --- Panel typography --- */
+.tabs-detail .tabs-detail-panel h2 {
+  margin: 27px 0 13.5px;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+  color: var(--text-color);
+}
+
+.tabs-detail .tabs-detail-panel h3 {
+  margin: 27px 0 13.5px;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.tabs-detail .tabs-detail-panel p {
+  margin: 0 0 13.5px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 45px;
+  color: var(--text-muted-color);
+}
+
+.tabs-detail .tabs-detail-panel a {
+  color: var(--link-color);
+}
+
+/* --- Images: EDS wraps them in <p>; render full width, block-level --- */
+.tabs-detail .tabs-detail-panel p:has(img),
+.tabs-detail .tabs-detail-panel p:has(picture) {
+  margin: 7px 0;
+  line-height: 0;
+}
+
+.tabs-detail .tabs-detail-panel picture,
+.tabs-detail .tabs-detail-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* --- Lists --- */
+.tabs-detail .tabs-detail-panel ul,
+.tabs-detail .tabs-detail-panel ol {
+  margin: 18px 0;
+  padding: 0 0 0 1.5em;
+}
+
+.tabs-detail .tabs-detail-panel li {
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  color: var(--text-muted-color);
+}

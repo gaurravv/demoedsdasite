@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/ski-touring-mont-blanc.html",
+  "path": "us/en/adventures/ski-touring-mont-blanc",
+  "timestamp": "2026-07-24T14:10:47.400Z",
+  "title": "Ski Touring Mont Blanc",
+  "template": "adventure-detail",
+  "blocks": [
+    "carousel-gallery",
+    "carousel-gallery",
+    "columns-spec",
+    "tabs-detail"
+  ]
+}
