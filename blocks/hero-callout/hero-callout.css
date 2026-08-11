@@ -93,6 +93,7 @@ main .hero-callout.app .app-badges a:any-link {
   line-height: 0;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero-callout.app .app-badges a:hover {
   text-decoration: none;
 }

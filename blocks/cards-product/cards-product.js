@@ -51,7 +51,7 @@ export default function decorate(block) {
     const icon = document.createElement('span');
     icon.className = 'cards-product-icon';
     const slug = iconSlug(tile.getAttribute('href'));
-    if (slug) icon.classList.add(`cards-product-icon--${slug}`);
+    if (slug) icon.classList.add(`cards-product-icon-${slug}`);
     icon.setAttribute('aria-hidden', 'true');
 
     const text = document.createElement('span');

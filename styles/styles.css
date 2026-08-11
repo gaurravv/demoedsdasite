@@ -99,8 +99,10 @@ h6 {
   scroll-margin: 40px;
 }
 
-h1 { color: var(--text-color); }
-h1 { font-size: var(--heading-font-size-xxl); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  color: var(--text-color);
+}
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
@@ -252,14 +254,10 @@ main .section.highlight {
 }
 
 main .section.dark {
-  background-color: var(--dark-color);
+  background-color: var(--section-dark-bg);
   color: #fff;
   margin: 0;
   padding: 40px 0;
-}
-
-main .section.dark {
-  background-color: var(--section-dark-bg);
 }
 
 main .section.dark h1,

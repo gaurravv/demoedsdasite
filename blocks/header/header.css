@@ -266,6 +266,7 @@ header nav .nav-drop-label {
   }
 
   /* top-level item / megamenu trigger row */
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-sections .default-content-wrapper > ul > li > a,
   header nav .nav-sections .default-content-wrapper > ul > li > .nav-drop-label {
     display: block;
@@ -313,6 +314,7 @@ header nav .nav-drop-label {
     border: 0;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
     display: block;
     padding: 11px 20px 11px 28px;
@@ -427,6 +429,7 @@ header nav .nav-drop-label {
     margin-bottom: 4px;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
     display: block;
     padding: 8px 10px;

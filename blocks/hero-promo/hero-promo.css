@@ -97,6 +97,7 @@
 }
 
 /* 10px gap between the two CTAs */
+/* stylelint-disable-next-line no-descending-specificity */
 .hero-promo .button-container + .button-container {
   margin-top: 10px;
 }
@@ -118,6 +119,7 @@ main .hero-promo a.button:any-link {
   text-decoration: none;
   color: #fff;
   white-space: normal;
+
   /* first CTA "Add My Home" -- green gradient */
   background-color: #00a32e;
   background-image: linear-gradient(#00c535 0%, #00a32e 100%);
@@ -129,11 +131,13 @@ main .hero-promo .button-container + .button-container a.button:any-link {
   background-image: linear-gradient(#00b8ea 0%, #0080cc 100%);
 }
 
+/* stylelint-disable no-descending-specificity */
 main .hero-promo a.button:hover,
 main .hero-promo a.button:focus {
   color: #fff;
   filter: brightness(0.95);
 }
+/* stylelint-enable no-descending-specificity */
 
 /* ---- Desktop ---- */
 @media (width >= 900px) {

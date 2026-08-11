@@ -135,6 +135,7 @@ footer .footer .footer-legal {
   border-top: 1px solid rgb(255 255 255 / 12%);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer .footer-legal p {
   margin: 0 0 12px;
   font-size: 13px;
@@ -179,6 +180,7 @@ footer .footer .footer-fca {
   border-top: 1px solid rgb(255 255 255 / 12%);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer .footer-fca p {
   margin: 0 0 12px;
   font-size: 12px;
