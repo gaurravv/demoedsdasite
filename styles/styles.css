@@ -162,6 +162,14 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Inline links inside body copy must not rely on colour alone (WCAG 1.4.1):
+   underline links that sit within a paragraph/list of default content.
+   Standalone links (buttons, cards, nav, footer link lists) are exempt. */
+main .default-content-wrapper p a:any-link,
+main .default-content-wrapper li a:any-link {
+  text-decoration: underline;
+}
+
 /* buttons */
 a.button:any-link,
 button {
