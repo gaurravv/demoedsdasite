@@ -57,11 +57,13 @@
 }
 
 /* ---------------------------------------- feature-label column (first column) */
+/* stylelint-disable no-descending-specificity */
 .table-compare table tbody td:first-child,
 .tabs-cover-panel table tbody td:first-child {
   padding: 14px 18px;
   text-align: left;
 }
+/* stylelint-enable no-descending-specificity */
 
 .table-compare table tbody td:first-child h3,
 .tabs-cover-panel table tbody td:first-child h3 {

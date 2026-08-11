@@ -88,7 +88,7 @@
   order: 1;
   width: 100%;
   margin: 0;
-  color: #ee5615;
+  color: #b83d00; /* darkened from #ee5615 for WCAG AA (4.9:1 on page bg) */
   font-size: 22px;
   font-weight: 600;
   line-height: 1.35;

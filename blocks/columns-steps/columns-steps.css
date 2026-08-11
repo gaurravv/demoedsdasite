@@ -37,7 +37,7 @@
   height: 48px;
   margin: 0 auto 22px;
   padding-right: 22px; /* offset the arrow point so the label sits in the body */
-  background-color: #77ddff;
+  background-color: #7df;
   color: #005485;
   font-family: var(--heading-font-family);
   font-weight: 700;
@@ -53,7 +53,7 @@
   font-size: 19.8px;
   font-weight: 600;
   line-height: 28px;
-  color: rgb(35, 80, 160); /* source #2350a0 = var(--link-color) */
+  color: rgb(35 80 160); /* source #2350a0 = var(--link-color) */
   text-align: center;
 }
 
@@ -64,7 +64,7 @@
   font-size: 18px;
   font-weight: 300;
   line-height: 28px;
-  color: rgb(79, 79, 79); /* source #4f4f4f = var(--text-color) */
+  color: rgb(79 79 79); /* source #4f4f4f = var(--text-color) */
   text-align: center;
 }
 

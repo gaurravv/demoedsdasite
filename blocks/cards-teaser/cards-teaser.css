@@ -17,6 +17,7 @@
   margin: 0;
   padding: 0;
   display: grid;
+
   /* auto-fit keeps admiral's 3-up on the home row while adapting to
      2-up / 4-up reuse and collapsing to a single column on mobile. */
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

@@ -9,17 +9,17 @@
   --text-color: #4f4f4f;                /* body text */
   --text-muted-color: #4f4f4f;
   --link-color: #2350a0;                /* default link blue */
-  --link-hover-color: #0077ff;          /* bright accent blue */
+  --link-hover-color: #0061cc;          /* bright accent blue (WCAG AA: 5.1:1 on page bg) */
   --accent-color: #005485;              /* Admiral brand blue */
   --brand-blue: #005485;
-  --bright-blue: #0077ff;
+  --bright-blue: #0061cc;               /* accent blue, darkened for AA contrast */
   --heading-color: #005485;             /* H2/H3 headings render brand blue */
   --button-background-color: #005485;
   --button-text-color: #fff;
   --light-color: #f0f0eb;
   --dark-color: #091f30;                /* dark navy band */
   --section-dark-bg: #091f30;
-  --section-accent-light-bg: #bbeeff;   /* ice-blue */
+  --section-accent-light-bg: #bef;   /* ice-blue */
   --section-accent-bg: #e2f4e7;         /* pale mint (bg-fino) */
   --sub-hero-blue: #0c3a84;
 

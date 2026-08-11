@@ -29,7 +29,7 @@ footer .footer a:any-link {
 }
 
 footer .footer a:hover {
-  color: var(--bright-blue, #0077ff);
+  color: var(--bright-blue, #0061cc);
   text-decoration: underline;
 }
 
@@ -118,7 +118,7 @@ footer .footer .footer-social-links a:any-link {
 }
 
 footer .footer .footer-social-links a:hover {
-  color: var(--bright-blue, #0077ff);
+  color: var(--bright-blue, #0061cc);
 }
 
 footer .footer .footer-social-links img,
@@ -135,6 +135,7 @@ footer .footer .footer-legal {
   border-top: 1px solid rgb(255 255 255 / 12%);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer .footer-legal p {
   margin: 0 0 12px;
   font-size: 13px;
@@ -179,6 +180,7 @@ footer .footer .footer-fca {
   border-top: 1px solid rgb(255 255 255 / 12%);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer .footer-fca p {
   margin: 0 0 12px;
   font-size: 12px;
@@ -192,5 +194,5 @@ footer .footer .footer-fca a:any-link {
 }
 
 footer .footer .footer-fca a:hover {
-  color: var(--bright-blue, #0077ff);
+  color: var(--bright-blue, #0061cc);
 }
