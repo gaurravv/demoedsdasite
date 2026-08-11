@@ -29,7 +29,7 @@ footer .footer a:any-link {
 }
 
 footer .footer a:hover {
-  color: var(--bright-blue, #0077ff);
+  color: var(--bright-blue, #0061cc);
   text-decoration: underline;
 }
 
@@ -118,7 +118,7 @@ footer .footer .footer-social-links a:any-link {
 }
 
 footer .footer .footer-social-links a:hover {
-  color: var(--bright-blue, #0077ff);
+  color: var(--bright-blue, #0061cc);
 }
 
 footer .footer .footer-social-links img,
@@ -192,5 +192,5 @@ footer .footer .footer-fca a:any-link {
 }
 
 footer .footer .footer-fca a:hover {
-  color: var(--bright-blue, #0077ff);
+  color: var(--bright-blue, #0061cc);
 }
