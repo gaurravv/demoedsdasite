@@ -1,0 +1,41 @@
+{
+  "variantName": "quote-expert",
+  "baseBlock": "quote",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:30:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/car-insurance",
+    "originPage": "Car insurance landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "testimonial",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "single quotation + attribution (name + role); decorative quote-mark icon",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "quoteCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "single highlighted expert / staff testimonial with a name + role attribution",
+      "non-rotating pull-quote callouts on a dark band ('What the experts say')",
+      "one prominent quotation with a decorative quote-mark icon"
+    ],
+    "notSuitableFor": [
+      "rotating multi-testimonial sliders with Prev/Next controls (use carousel-quote)",
+      "customer review widgets / star ratings (use embed-review)",
+      "plain inline blockquotes within body copy (use default content)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/car-insurance"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:30:00.000Z",
+    "notes": "Car-insurance 'What the experts say' section (#basic-18930): single white quote card on a dark sea-blue band, quotation attributed to 'Stephen Willmett-Lewis, Senior Motor Product Manager'. Single, non-rotating quotation (distinct from the homepage carousel-quote testimonial slider)."
+  }
+}

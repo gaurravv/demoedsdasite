@@ -1,161 +1,98 @@
 /* eslint-disable */
 /* global WebImporter */
 
-import carouselHeroParser from './parsers/carousel-hero.js';
-import cardsTeaserParser from './parsers/cards-teaser.js';
+// PARSER IMPORTS
 import heroPromoParser from './parsers/hero-promo.js';
-import wkndCleanupTransformer from './transformers/wknd-cleanup.js';
-import wkndSectionsTransformer from './transformers/wknd-sections.js';
+import cardsProductParser from './parsers/cards-product.js';
+import embedVideoParser from './parsers/embed-video.js';
+import heroCalloutParser from './parsers/hero-callout.js';
+import cardsTeaserParser from './parsers/cards-teaser.js';
+import heroAwardParser from './parsers/hero-award.js';
+import carouselQuoteParser from './parsers/carousel-quote.js';
 
+// TRANSFORMER IMPORTS
+import cleanupTransformer from './transformers/admiral-cleanup.js';
+import sectionsTransformer from './transformers/admiral-sections.js';
+
+// PARSER REGISTRY
 const parsers = {
-  'carousel-hero': carouselHeroParser,
-  'cards-teaser': cardsTeaserParser,
   'hero-promo': heroPromoParser,
+  'cards-product': cardsProductParser,
+  'embed-video': embedVideoParser,
+  'hero-callout': heroCalloutParser,
+  'cards-teaser': cardsTeaserParser,
+  'hero-award': heroAwardParser,
+  'carousel-quote': carouselQuoteParser,
 };
 
+// TRANSFORMER REGISTRY (cleanup before parse, sections after)
+const transformers = [cleanupTransformer, sectionsTransformer];
+
+// PAGE TEMPLATE CONFIGURATION (embedded from page-templates.json)
 const PAGE_TEMPLATE = {
-  "name": "home",
-  "description": "Homepage with hero carousel, featured article teaser, article list, promo banner, and adventure list.",
-  "urls": [
-    "https://publish-p133255-e1921317.adobeaemcloud.com/us/en.html"
+  name: 'home',
+  description: 'Admiral homepage',
+  urls: ['https://www.admiral.com/'],
+  blocks: [
+    { name: 'hero-promo', instances: ['.hero-banner'] },
+    { name: 'cards-product', instances: ['.product-grid'] },
+    { name: 'embed-video', instances: ['#schema-videoobject'] },
+    { name: 'hero-callout', instances: ['.sub-hero-banner--person-infront-house', '.sub-hero-banner--admiral-app'] },
+    { name: 'cards-teaser', instances: ['#product-pods-5856 .grid'] },
+    { name: 'hero-award', instances: ['.custom-banner.dark-blue'] },
+    { name: 'carousel-quote', instances: ['.testimonials-slider'] },
   ],
-  "blocks": [
-    {
-      "name": "carousel-hero",
-      "instances": [
-        ".carousel.cmp-carousel--hero"
-      ]
-    },
-    {
-      "name": "cards-teaser",
-      "instances": [
-        ".cmp-layout-container--fixed:has(#title-c2d2b28d00) .image-list .cmp-image-list",
-        ".cmp-layout-container--fixed:has(#title-ca6ac0fe65) .image-list .cmp-image-list"
-      ]
-    },
-    {
-      "name": "hero-promo",
-      "instances": [
-        ".cmp-teaser--hero.cmp-teaser--imagebottom"
-      ]
-    }
-  ],
-  "sections": [
-    {
-      "id": "section-1-hero-carousel",
-      "name": "Hero Carousel",
-      "selector": ".carousel.cmp-carousel--hero",
-      "style": null,
-      "blocks": [
-        "carousel-hero"
-      ],
-      "defaultContent": []
-    },
-    {
-      "id": "section-2-recent-articles",
-      "name": "Recent Articles",
-      "selector": ".cmp-layout-container--fixed:has(#title-c2d2b28d00)",
-      "style": null,
-      "blocks": [
-        "cards-teaser"
-      ],
-      "defaultContent": [
-        ".cmp-title--underline:has(#title-c2d2b28d00)",
-        ".button.cmp-button--primary:has(#button-2e6d32893a)"
-      ]
-    },
-    {
-      "id": "section-3-next-adventures-heading",
-      "name": "Next Adventures heading",
-      "selector": ".cmp-title--underline:has(#title-971080d74b)",
-      "style": null,
-      "blocks": [],
-      "defaultContent": [
-        ".cmp-title--underline:has(#title-971080d74b)"
-      ]
-    },
-    {
-      "id": "section-4-climbing-new-zealand-promo",
-      "name": "Climbing New Zealand Promo Teaser",
-      "selector": ".cmp-teaser--hero.cmp-teaser--imagebottom",
-      "style": null,
-      "blocks": [
-        "hero-promo"
-      ],
-      "defaultContent": []
-    },
-    {
-      "id": "section-5-adventures-list",
-      "name": "Where do you want to go? (Adventures list)",
-      "selector": ".cmp-layout-container--fixed:has(#title-ca6ac0fe65)",
-      "style": null,
-      "blocks": [
-        "cards-teaser"
-      ],
-      "defaultContent": [
-        "#title-ca6ac0fe65",
-        ".button.cmp-button--primary:has(#button-b6562c963d)"
-      ]
-    }
-  ]
 };
-
-const transformers = [
-  wkndCleanupTransformer,
-  ...(PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [wkndSectionsTransformer] : []),
-];
 
 function executeTransformers(hookName, element, payload) {
   const enhancedPayload = { ...payload, template: PAGE_TEMPLATE };
-  transformers.forEach((transformer) => {
+  transformers.forEach((transformerFn) => {
     try {
-      transformer(hookName, element, enhancedPayload);
+      transformerFn.call(null, hookName, element, enhancedPayload);
     } catch (e) {
-      console.warn(`Transformer failed on hook "${hookName}": ${e.message}`);
+      console.error(`Transformer failed at ${hookName}:`, e);
     }
   });
 }
 
 function findBlocksOnPage(document, template) {
-  const found = [];
-  (template.blocks || []).forEach((block) => {
-    (block.instances || []).forEach((selector) => {
+  const pageBlocks = [];
+  template.blocks.forEach((blockDef) => {
+    // Skip section-* entries — those are section-metadata styling, not parseable blocks.
+    if (blockDef.name.startsWith('section-')) return;
+    blockDef.instances.forEach((selector) => {
       const elements = document.querySelectorAll(selector);
-      if (!elements.length) {
-        console.warn(`No elements found for block "${block.name}" with selector "${selector}"`);
-        return;
+      if (elements.length === 0) {
+        console.warn(`Block "${blockDef.name}" selector not found: ${selector}`);
       }
-      const section = (template.sections || []).find((s) => (s.blocks || []).includes(block.name));
       elements.forEach((element) => {
-        found.push({
-          name: block.name,
-          selector,
-          element,
-          section: section ? section.id : null,
-        });
+        pageBlocks.push({ name: blockDef.name, selector, element });
       });
     });
   });
-  return found;
+  console.log(`Found ${pageBlocks.length} block instances on page`);
+  return pageBlocks;
 }
 
 export default {
   transform: (payload) => {
-    const { document, url, html, params } = payload;
+    const { document, url, params } = payload;
     const main = document.body;
 
     executeTransformers('beforeTransform', main, payload);
 
     const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
-
     pageBlocks.forEach((block) => {
-      if (!block.element.parentNode) {
-        return;
-      }
-      try {
-        parsers[block.name](block.element, { document, url, params });
-      } catch (e) {
-        console.warn(`Parser "${block.name}" failed: ${e.message}`);
+      if (!block.element.parentNode) return; // already replaced by an earlier parser
+      const parser = parsers[block.name];
+      if (parser) {
+        try {
+          parser(block.element, { document, url, params });
+        } catch (e) {
+          console.error(`Failed to parse ${block.name} (${block.selector}):`, e);
+        }
+      } else {
+        console.warn(`No parser found for block: ${block.name}`);
       }
     });
 
@@ -167,9 +104,10 @@ export default {
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
 
-    const path = WebImporter.FileUtils.sanitizePath(
-      new URL(params.originalURL).pathname.replace(/\/$/, '').replace(/\.html$/, ''),
-    );
+    const rawPath = new URL(params.originalURL).pathname
+      .replace(/\/$/, '')
+      .replace(/\.html?$/, '');
+    const path = WebImporter.FileUtils.sanitizePath(rawPath === '' ? '/index' : rawPath);
 
     return [{
       element: main,

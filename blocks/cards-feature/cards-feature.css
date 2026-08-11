@@ -1,0 +1,57 @@
+/* Block: cards-feature — "Why choose" text-only stat tiles.
+   Source: admiral.com/car-insurance  #basic-18609 .grid (.pod.pod--product.admiral-blue)
+   Decorated DOM: .cards-feature > ul > li > div.cards-feature-card-body > (h3 + p)
+   Values extracted from source computed styles — do not replace with generic defaults. */
+
+.cards-feature > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+/* Blue rounded panel (.pod.admiral-blue in source) */
+.cards-feature > ul > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: #2350a0;                       /* source rgb(35, 80, 160) */
+  color: #fff;
+  border-radius: 15px;
+  padding: 16px 16px 24px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.cards-feature .cards-feature-card-body {
+  margin: 0;
+}
+
+/* Stat heading (h3.text-white) */
+.cards-feature li h3 {
+  margin: 0;
+  padding: 0 0 20px;
+  font-size: 19.8px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #fff;
+  text-align: center;
+}
+
+/* Supporting paragraph (p.text-white) — negative top margin nets a ~10px gap under heading */
+.cards-feature li p {
+  margin: -10px 0 0;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  color: #fff;
+  text-align: center;
+}
+
+@media (width >= 900px) {
+  .cards-feature > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,83 +1,143 @@
-/* Block: cards-teaser — layout/spacing/typography migrated from WKND image-list.
-   Colors mapped to brand.css variables (source rendered anomalous test theme). */
+/* Block: cards-teaser
+   Visual design migrated from admiral.com (#product-pods-5856 .grid — the
+   home "product-pod" teaser row). Each card = white pod with a full-bleed
+   photo on top, a brand-blue H3, a light description, and a "more" text link
+   with an arrow-circle affordance.
 
+   Decorated EDS DOM this CSS targets:
+     .cards-teaser.block > ul > li            (li == admiral .pod white card)
+       > .cards-teaser-card-image > picture > img
+       > .cards-teaser-card-body > h3, p, p.button-container > a.button
+
+   Robust to 2–4 cards per row (auto-fit) and to cards with or without images. */
+
+/* ---- Grid of cards ---- */
 .cards-teaser > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 32px;
+  /* auto-fit keeps admiral's 3-up on the home row while adapting to
+     2-up / 4-up reuse and collapsing to a single column on mobile. */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;               /* source: 7.5px cell padding => 15px gutters */
 }
 
-/* Borderless cards: image + title + description stacked, no card chrome */
+/* ---- Card (li == admiral .pod) ---- */
 .cards-teaser > ul > li {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
+  padding: 19px 14px 12px;                 /* source pod padding */
+  background-color: #fff;
+  border: 1px solid rgb(183 183 203);      /* source pod border */
+  border-radius: 4px;
   box-shadow: none;
+  overflow: hidden;                        /* clip the flush image to rounded corners */
 }
 
-/* Image: fills column width, fixed crop height, object-fit cover, no radius */
+/* ---- Image: full-bleed to the card's top & sides ---- */
 .cards-teaser .cards-teaser-card-image {
+  margin: -20px -15px 24px;                /* negates card padding + 24px gap below */
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
   line-height: 0;
 }
 
 .cards-teaser .cards-teaser-card-image img {
   display: block;
   width: 100%;
-  height: 200px;
+  height: 140px;                           /* source image crop height */
   object-fit: cover;
   border-radius: 0;
 }
 
-/* Card text area sits directly under the image.
-   EDS wraps the title link + description text in a single <p>. */
+/* ---- Text area ---- */
 .cards-teaser .cards-teaser-card-body {
+  display: flex;
+  flex: 1;                                 /* fill card so the link pins to the bottom */
+  flex-direction: column;
+}
+
+/* Heading — brand link-blue, 19.8px/28 */
+.cards-teaser .cards-teaser-card-body h3 {
+  margin: -4px 0 0;
+  padding: 0 0 20px;
+  font-family: var(--heading-font-family);
+  font-size: 19.8px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--link-color);                /* #2350a0 == source rgb(35,80,160) */
+  text-transform: none;
+}
+
+/* Description — light grey, 18px/28, weight 300 */
+.cards-teaser .cards-teaser-card-body p {
+  margin: -10px 0 0;
+  padding: 0 0 28px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  color: var(--text-color);                /* #4f4f4f == source rgb(79,79,79) */
+}
+
+/* ---- "More" link ----
+   EDS auto-decorates the standalone <p><a> into
+   <p class="button-container"><a class="button">. Undo that pill treatment
+   and restore admiral's bright-blue text link + arrow-circle. */
+.cards-teaser .cards-teaser-card-body p.button-container {
+  margin: 28px 0 0;
+  margin-top: auto;                        /* bottom-align the link across cards */
+  padding: 0;
+  display: block;
+  text-align: left;
+}
+
+.cards-teaser .cards-teaser-card-body p.button-container:last-child {
+  padding-bottom: 0;
+}
+
+main .cards-teaser a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
   margin: 0;
   padding: 0;
-}
-
-.cards-teaser .cards-teaser-card-body > p {
-  margin: 2px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  background-color: transparent;
+  color: var(--bright-blue);               /* #0077ff ~= source rgb(0,120,255) */
   font-family: var(--body-font-family);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 21px;
-  color: var(--text-muted-color);
-}
-
-/* Title link — 18px, weight 600, uppercase, teal accent, on its own line */
-.cards-teaser .cards-teaser-card-body > p > a:first-child {
-  display: block;
-  margin-bottom: 16px;
   font-size: 18px;
-  font-weight: 600;
-  line-height: 27px;
-  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
   text-decoration: none;
-  color: var(--accent-color);
+  text-overflow: clip;
+  white-space: normal;
 }
 
-.cards-teaser .cards-teaser-card-body > p > a:first-child:hover {
-  color: var(--link-hover-color);
-  text-decoration: none;
+/* Arrow-circle affordance (source .more-link--arrow-circle ::after) */
+main .cards-teaser a.button:any-link::after {
+  content: "";
+  display: inline-block;
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2013%2013%22%3E%3Cpath%20d%3D%22M5.158%203.006L7.52%206.5l-2.363%203.505h1.369L8.889%206.5%206.527%203.006z%22%20fill%3D%22%230078ff%22%20%2F%3E%3Cpath%20d%3D%22M6.5%200a6.5%206.5%200%20100%2013%206.5%206.5%200%20000-13m0%201C9.533%201%2012%203.467%2012%206.5S9.533%2012%206.5%2012A5.506%205.506%200%20011%206.5C1%203.467%203.467%201%206.5%201%22%20fill%3D%22%230078ff%22%20%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
-/* Description: single-line ellipsis truncation (source clamps to one line) */
-.cards-teaser .cards-teaser-card-description {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-@media (width >= 900px) {
-  /* Source: 4 fluid columns with a 14px inter-card gutter */
-  .cards-teaser > ul {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 32px 14px;
-  }
+main .cards-teaser a.button:any-link:hover,
+main .cards-teaser a.button:any-link:focus {
+  background: none;
+  background-color: transparent;
+  color: var(--bright-blue);
+  text-decoration: underline;
 }

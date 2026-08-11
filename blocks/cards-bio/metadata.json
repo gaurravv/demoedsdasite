@@ -1,0 +1,42 @@
+{
+  "variantName": "cards-bio",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:56:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/magazine/guides/motor/10-ways-to-make-your-car-last-longer",
+    "originPage": "Admiral magazine article (10 ways to make your car last longer)",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "boxed",
+    "purpose": "author-bio",
+    "imagePattern": "avatar"
+  },
+  "contentPattern": {
+    "structure": "bordered pod: author avatar + author name (heading) + role (heading) + descriptive bio paragraph (with inline link) + 'Share with your friends...' heading + social share-icon row",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "cardCount": 1,
+    "shareLinkCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "end-of-article author identity pods (avatar + name + role + full bio paragraph)",
+      "boxed 'about the author' cards that also carry a share-icon row",
+      "single contributor pods that need a descriptive body paragraph, not just name + role"
+    ],
+    "notSuitableFor": [
+      "compact one-line byline strips with no bio paragraph (use cards-byline)",
+      "multi-person team / contributor grids (use cards-team)",
+      "article teaser grids with image + title + description linking to detail pages (use cards-teaser)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/guides/motor/10-ways-to-make-your-car-last-longer"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:56:00.000Z",
+    "notes": "NEW variant created for the Admiral magazine article author-bio pod (.story__expert.pod): Gareth Herincx avatar, name (H3), 'Motoring journalist' role (H3), a full bio paragraph with an inline 'Automotive Blog' link, plus a 'Share with your friends...' heading and Facebook/X/native-share icon links. Closest existing variant cards-team scored below 0.8 (it is explicitly NOT suitable for cards needing a body description). The .story__share sub-block is a DOM child of the pod and is carried inside this block. Share links are static; forms out of scope."
+  }
+}

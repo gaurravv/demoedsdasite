@@ -93,12 +93,13 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.25;
-  color: var(--text-color);
+  color: var(--heading-color);
   scroll-margin: 40px;
 }
 
+h1 { color: var(--text-color); }
 h1 { font-size: var(--heading-font-size-xxl); }
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
@@ -257,6 +258,10 @@ main .section.dark {
   padding: 40px 0;
 }
 
+main .section.dark {
+  background-color: var(--section-dark-bg);
+}
+
 main .section.dark h1,
 main .section.dark h2,
 main .section.dark h3,
@@ -267,12 +272,34 @@ main .section.dark p {
   color: #fff;
 }
 
-/* WKND default-content link/button treatment
-   Default-content links styled as underlined text links (e.g. "All Articles",
-   "All Trips") while explicit .button links get the solid accent treatment. */
-main .default-content-wrapper a.button:any-link {
-  border-radius: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+/* Admiral ice-blue accent section (e.g. car-insurance "Do I need..." bands) */
+main .section.accent-light {
+  background-color: var(--section-accent-light-bg);
+  margin: 0;
+  padding: 40px 0;
+}
+
+/* Admiral pale-mint accent section (e.g. help-support "More support") */
+main .section.accent {
+  background-color: var(--section-accent-bg);
+  margin: 0;
+  padding: 40px 0;
+}
+
+/* Admiral button treatment: primary CTAs use the solid brand-blue pill;
+   secondary/default links stay as accent-blue text links. */
+main .button-container { display: inline; }
+
+main a.button:any-link {
+  border-radius: 8px;
   font-weight: 600;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+}
+
+main a.button.secondary:any-link {
+  background: transparent;
+  border: 2px solid var(--bright-blue);
+  color: var(--bright-blue);
+  border-radius: 4px;
 }

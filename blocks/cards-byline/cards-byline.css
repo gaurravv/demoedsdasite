@@ -1,0 +1,91 @@
+/* cards-byline: editorial article byline strip.
+   Matches admiral.com .story__meta: a compact horizontal strip with a
+   top+bottom hairline border, a small square author avatar, a bold author
+   name, and a lighter muted date / read-time line.
+   All values extracted from source computed styles
+   (see migration-work/cards-byline-extracted.css). */
+
+/* The single-row byline container gets the hairline border + padding.
+   Source: border-top/bottom 1px solid rgb(183,183,203); padding 10px 0; margin 35px 0. */
+.cards-byline > ul {
+  list-style: none;
+  margin: 35px 0;
+  padding: 10px 0;
+  border-top: 1px solid rgb(183 183 203);
+  border-bottom: 1px solid rgb(183 183 203);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* Row: avatar + stacked name/date, vertically centred. Source column-gap 10px. */
+.cards-byline > ul > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+/* Avatar cell — small square image with a 1px border (source: 42x40, radius 0). */
+.cards-byline .cards-byline-card-image {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.cards-byline .cards-byline-card-image img {
+  display: block;
+  width: 42px;
+  height: 40px;
+  border: 1px solid rgb(183 183 203);
+  border-radius: 0;
+  object-fit: cover;
+}
+
+/* Text cell — author name (top) + date/read-time (below). */
+.cards-byline .cards-byline-card-body {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
+}
+
+.cards-byline .cards-byline-card-body p {
+  margin: 0;
+  line-height: 22px;
+  color: var(--text-color); /* rgb(79, 79, 79) */
+}
+
+/* Author name: bold. Source 14.4px / 700. */
+.cards-byline .cards-byline-card-body p:first-child {
+  font-size: 14.4px;
+  font-weight: 700;
+}
+
+/* Date / read-time: light + muted. Source 12.6px / 300. */
+.cards-byline .cards-byline-card-body p:last-child {
+  font-size: 12.6px;
+  font-weight: 300;
+}
+
+/* Source hides the <br> separators so the date/read-time flows as one line
+   (the " | " text separators are kept). */
+.cards-byline .cards-byline-card-body p br {
+  display: none;
+}
+
+/* Share-icon row (only present when the byline carries share links).
+   Lay icon-only links out horizontally as small square tiles. */
+.cards-byline .cards-byline-share {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.cards-byline .cards-byline-share a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}

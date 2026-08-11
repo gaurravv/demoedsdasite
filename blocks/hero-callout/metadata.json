@@ -1,0 +1,40 @@
+{
+  "variantName": "hero-callout",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-10T12:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/",
+    "originPage": "Admiral homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "accent",
+    "density": "compact",
+    "purpose": "callout",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "side-by-side image + copy (heading + short paragraph + call-to-action link[s])",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "mid-page promotional callout banners with an illustration beside a heading, short text and a CTA",
+      "coloured 'sub-hero' promo strips (e.g. scam warning, app download) with image on one side and copy + link(s) on the other",
+      "single highlight promos that are NOT full-bleed photo backgrounds"
+    ],
+    "notSuitableFor": [
+      "full-bleed photo hero at the very top of the page (use hero-promo)",
+      "dark full-width award/brand banners with no CTA (use hero-award)",
+      "repeating grids of items (use cards / cards-teaser)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index", "/magazine/guides/motor/10-ways-to-make-your-car-last-longer"],
+    "reuseCount": 3,
+    "lastUsed": "2026-08-10T13:52:00.000Z",
+    "notes": "Reused twice on the homepage for the same 'sub-hero-banner' pattern: (Section 4) scam-warning callout on a light-blue box with a single 'Find Out More' CTA; (Section 9) 'Download the Admiral app' promo on a blue banner with two app-store badge links. Reused again on the Admiral magazine article (10-ways-to-make-your-car-last-longer): end-of-article 'Great car insurance options for the whole family' mini sub-hero promo - illustrated car image beside heading + single green 'Find out more' CTA on a blue band. Image-beside-text with copy + CTA(s), coloured accent background (not a full-bleed photo)."
+  }
+}

@@ -1,0 +1,119 @@
+/*
+ * Embed Review Block
+ * Show videos, social posts and third-party review widgets directly on your page
+ * https://www.hlx.live/developer/block-collection/embed
+ */
+
+.embed-review {
+  width: unset;
+  max-width: 800px;
+  margin: 32px auto;
+  text-align: center;
+}
+
+.embed-review > div {
+  display: flex;
+  justify-content: center;
+}
+
+.embed-review.embed-review-twitter .twitter-tweet-rendered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Trustpilot review card ---------------------------------------------
+ * The live Trustpilot widget blocks being iframed and only renders on
+ * registered domains, so the block JS renders a centered, branded logo
+ * card that links out to the Admiral review profile. Matches the source:
+ * a centered green star + dark "Trustpilot" wordmark on the page background.
+ */
+.embed-review.embed-review-trustpilot {
+  margin: 40px auto;
+}
+
+.embed-review .embed-review-trustpilot {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  color: #191919;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.embed-review .embed-review-trustpilot:hover {
+  color: #191919;
+  text-decoration: none;
+}
+
+.embed-review .embed-review-trustpilot-star {
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+
+.embed-review .embed-review-trustpilot-word {
+  font-family: var(--heading-font-family);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #191919;
+}
+
+@media (width >= 900px) {
+  .embed-review .embed-review-trustpilot-star {
+    width: 44px;
+    height: 44px;
+  }
+
+  .embed-review .embed-review-trustpilot-word {
+    font-size: 34px;
+  }
+}
+
+/* --- Video / iframe placeholder (retained for other embed-review uses) --- */
+.embed-review .embed-review-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.embed-review .embed-review-placeholder > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+
+.embed-review .embed-review-placeholder picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.embed-review .embed-review-placeholder-play button {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(3);
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 20px;
+  padding: 0;
+}
+
+.embed-review .embed-review-placeholder-play button::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0;
+  height: 10px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid;
+  top: 4px;
+  left: 7px;
+}

@@ -1,0 +1,41 @@
+{
+  "variantName": "tabs-cover",
+  "baseBlock": "tabs",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:30:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/car-insurance",
+    "originPage": "Car insurance landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "toggle",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "two tab labels, each switching a panel that contains a product-comparison table",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "tabCount": 2
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "simple 2-way (or few-way) toggles that switch between comparable data panels",
+      "cover/tier switchers (e.g. Comprehensive vs Third party) each showing a comparison table",
+      "compact labeled tab switchers where each panel holds structured data rather than long-form prose"
+    ],
+    "notSuitableFor": [
+      "long-form rich content panels with headings, images and lists (use tabs-detail)",
+      "expandable FAQ-style Q&A (use accordion / accordion-faq)",
+      "content that must all be visible at once (use default content / columns)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/car-insurance"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:30:00.000Z",
+    "notes": "Car-insurance cover-comparison section (#basic-15950): 'Comprehensive cover' | 'Third party cover' toggle. Each tab panel contains a table-compare comparison table (Platinum/Gold/Admiral/Essential columns x ~18 cover-feature rows)."
+  }
+}

@@ -1,29 +1,37 @@
 :root {
-  /* Typography */
-  --heading-font-family: "Asar", georgia, "Times New Roman", times, serif;
-  --body-font-family: "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif;
+  /* Typography — Admiral uses jaf-facitweb (Monotype). Fall back to the site's
+     own system stack since it is a commercial webfont not on Typekit/Google. */
+  --heading-font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  --body-font-family: "Helvetica Neue", helvetica, arial, sans-serif;
 
-  /* Colors — classic WKND palette */
-  --background-color: #fff;
-  --text-color: #000;
-  --text-muted-color: #2b2b2b;
-  --link-color: #2b6656;
-  --link-hover-color: #1a4034;
-  --accent-color: #2b6656;
-  --button-background-color: #2b6656;
+  /* Colors — extracted from admiral.com */
+  --background-color: #f0f0eb;          /* ambient page grey-beige */
+  --text-color: #4f4f4f;                /* body text */
+  --text-muted-color: #4f4f4f;
+  --link-color: #2350a0;                /* default link blue */
+  --link-hover-color: #0077ff;          /* bright accent blue */
+  --accent-color: #005485;              /* Admiral brand blue */
+  --brand-blue: #005485;
+  --bright-blue: #0077ff;
+  --heading-color: #005485;             /* H2/H3 headings render brand blue */
+  --button-background-color: #005485;
   --button-text-color: #fff;
-  --light-color: #f7f7f7;
-  --dark-color: #000;
+  --light-color: #f0f0eb;
+  --dark-color: #091f30;                /* dark navy band */
+  --section-dark-bg: #091f30;
+  --section-accent-light-bg: #bbeeff;   /* ice-blue */
+  --section-accent-bg: #e2f4e7;         /* pale mint (bg-fino) */
+  --sub-hero-blue: #0c3a84;
 
   /* Spacing */
   --section-padding: 40px;
   --content-max-width: 1200px;
-  --nav-height: 64px;
+  --nav-height: 80px;
 
   /* Heading sizes (desktop) */
   --heading-size-xxl: 48px;
-  --heading-size-xl: 36px;
-  --heading-size-l: 24px;
+  --heading-size-xl: 38px;
+  --heading-size-l: 25px;
   --heading-size-m: 20px;
   --heading-size-s: 18px;
   --heading-size-xs: 16px;

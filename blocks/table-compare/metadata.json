@@ -1,0 +1,42 @@
+{
+  "variantName": "table-compare",
+  "baseBlock": "table",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:30:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/car-insurance",
+    "originPage": "Car insurance landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "comparison",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "header row of product/tier columns + one row per feature with tick/cross/'Optional'/value cells",
+    "buttonCount": 0,
+    "imageCount": 4,
+    "columnCount": 5,
+    "rowCount": 18
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "product/tier feature-comparison grids (multiple products x many feature rows)",
+      "cover-comparison tables with tick / cross / 'Optional' / price value cells",
+      "at-a-glance side-by-side capability matrices with badge/logo column headers"
+    ],
+    "notSuitableFor": [
+      "simple key/value spec sheets (use columns-spec)",
+      "narrative or single-datapoint content (use default content)",
+      "interactive filtering/sorting grids (needs custom development)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/car-insurance"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:30:00.000Z",
+    "notes": "Car-insurance cover-comparison tables (two instances, one per tabs-cover panel). First column = cover feature label; header columns = Admiral Platinum / Gold / Admiral / Essential (badge images); cells contain tick (badge-tick.svg), cross (badge-cross.svg), 'Optional' text, or £ value. Nested inside the Section 7 tabs-cover block."
+  }
+}

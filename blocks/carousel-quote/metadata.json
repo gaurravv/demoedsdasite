@@ -1,0 +1,41 @@
+{
+  "variantName": "carousel-quote",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-08-10T12:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/",
+    "originPage": "Admiral homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "testimonial",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "per slide: customer quote (callout) + small avatar + author name + location; Prev/Next controls",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "slideCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "rotating customer testimonial / review sliders with Previous/Next controls",
+      "quote carousels where each slide is a short quote + attribution (name + location)",
+      "social-proof sections cycling through several short customer quotes"
+    ],
+    "notSuitableFor": [
+      "promotional hero sliders with image + heading + description + CTA per slide (use carousel-hero)",
+      "image-only photo gallery carousels (use carousel-gallery)",
+      "a single, non-rotating highlighted quotation (use the quote block)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T12:18:00.000Z",
+    "notes": "Admiral homepage testimonials slider. 3 unique testimonials (Mahjabeen/Ilford, Stefan/Manchester, Deborah/Wallasey); slick-cloned duplicates in the source DOM are runtime artifacts and excluded. Avatar image is a generic placeholder shared across slides."
+  }
+}

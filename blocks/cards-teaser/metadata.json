@@ -32,9 +32,17 @@
     ]
   },
   "usage": {
-    "pagesUsing": ["/us/en", "/us/en/magazine", "/us/en/adventures"],
-    "reuseCount": 4,
-    "lastUsed": "2026-07-24T13:34:38.000Z",
-    "notes": "Homepage: Recent Articles list and Where do you want to go? adventures list. Magazine: All Articles list (5 article teaser cards). Adventures: Current Adventures grid (16 adventure cards, tab filter dropped)."
+    "pagesUsing": [
+      "/us/en",
+      "/us/en/magazine",
+      "/us/en/adventures",
+      "/index",
+      "/car-insurance",
+      "/magazine/guides/motor/10-ways-to-make-your-car-last-longer",
+      "/resources/home-hub"
+    ],
+    "reuseCount": 8,
+    "lastUsed": "2026-08-10T14:20:00.000Z",
+    "notes": "Homepage: Recent Articles list and Where do you want to go? adventures list. Magazine: All Articles list (5 article teaser cards). Adventures: Current Adventures grid (16 adventure cards, tab filter dropped). Admiral homepage: 3-up teaser cards (Looking after your pet on hot days / Stay safe online / Travelling with a medical condition) - image + heading + description + more link. Admiral car-insurance: reused three times - optional-extras cards (#basic-17124, 4 items), related-product cards (#basic-14598, 3 items), and useful-guides article cards (#basic-18934, 3 items). Admiral magazine article (10-ways-to-make-your-car-last-longer): 'Check out our related articles' 3-up grid (image + date + linked title) linking to other guides. Admiral resources/home-hub: 7 category teaser cards (#basic-16349, .product-pod-style) - thumbnail image + H3 heading + description, whole card links to an article sub-hub (100% match). Image/illustration + title + description (+ link) per card."
   }
 }

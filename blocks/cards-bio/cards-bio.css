@@ -1,0 +1,124 @@
+/* cards-bio: boxed author-identity pod (.story__expert.pod on admiral.com).
+   White bordered rounded box: a top meta row of a square avatar + author name
+   (bold brand link-blue) + role (smaller brand link-blue), and a full-width
+   descriptive bio paragraph below (grey body text with a bright-blue link).
+   All values extracted from source computed styles. */
+
+.cards-bio > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.cards-bio > ul > li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 30px;
+  border: 1px solid #b7b7cb;
+  border-radius: 4px;
+  padding: 19px 14px 12px;
+  background-color: #fff;
+  color: var(--text-color);
+}
+
+/* Speech-bubble notch at top-left (source .story__expert ::before/::after). */
+.cards-bio > ul > li::before,
+.cards-bio > ul > li::after {
+  content: "";
+  position: absolute;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+/* Outer triangle uses the border colour. */
+.cards-bio > ul > li::before {
+  top: -26px;
+  border-width: 0 13px 13px;
+  border-color: transparent transparent #b7b7cb;
+}
+
+/* Inner triangle is the white fill, offset 1px down/in. */
+.cards-bio > ul > li::after {
+  top: -24px;
+  left: 31px;
+  border-width: 0 12px 12px;
+  border-color: transparent transparent #fff;
+}
+
+/* Meta row: square avatar (spans both rows) + author name / role stacked. */
+.cards-bio .cards-bio-meta {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  grid-template-rows: 30px 30px;
+  column-gap: 10px;
+  align-items: center;
+  margin: 0 0 25px;
+}
+
+.cards-bio .cards-bio-avatar {
+  grid-row: 1 / 3;
+  grid-column: 1;
+  align-self: center;
+  line-height: 0;
+}
+
+.cards-bio .cards-bio-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 0;
+  object-fit: cover;
+}
+
+/* Author name (row 1). */
+.cards-bio .cards-bio-name {
+  grid-column: 2;
+  margin: 0;
+  font-size: 19.8px;
+  font-weight: 700;
+  line-height: 28px;
+  color: var(--link-color);
+}
+
+/* Role (row 2). */
+.cards-bio .cards-bio-role {
+  grid-column: 2;
+  margin: 0;
+  font-size: 12.6px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--link-color);
+}
+
+/* Full-width descriptive bio below the meta row. */
+.cards-bio .cards-bio-body {
+  margin-top: -12px;
+}
+
+.cards-bio .cards-bio-body p {
+  margin: 0;
+  font-size: 14.4px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--text-color);
+}
+
+.cards-bio .cards-bio-body p + p {
+  margin-top: 12px;
+}
+
+/* Inline bio link -- bright accent blue. */
+.cards-bio .cards-bio-body a:any-link {
+  color: var(--bright-blue);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.cards-bio .cards-bio-body a:hover {
+  text-decoration: underline;
+}

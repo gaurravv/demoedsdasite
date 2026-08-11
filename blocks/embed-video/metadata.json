@@ -1,0 +1,41 @@
+{
+  "variantName": "embed-video",
+  "baseBlock": "embed",
+  "version": "1.0.0",
+  "created": "2026-08-10T12:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/",
+    "originPage": "Admiral homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "video",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "single external video URL (optional poster image) rendered as a responsive iframe player",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "videoCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "embedding external third-party video (Vimeo, YouTube) via a URL",
+      "single featured video sections such as 'Watch our TV advert'",
+      "lazy-loaded / click-to-play video embeds with an optional poster image"
+    ],
+    "notSuitableFor": [
+      "self-hosted video files with a native player (use the vanilla video block)",
+      "social post embeds (use an embed social variant)",
+      "galleries of multiple rotating videos (use a carousel)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T12:18:00.000Z",
+    "notes": "Admiral homepage 'Watch our new TV advert' section. Vimeo embed: https://player.vimeo.com/video/1113186489 (URL recovered from consent-deferred iframe data-ta-src)."
+  }
+}

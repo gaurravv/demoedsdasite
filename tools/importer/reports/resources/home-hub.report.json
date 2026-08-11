@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.admiral.com/resources/home-hub",
+  "path": "resources/home-hub",
+  "timestamp": "2026-08-10T16:02:27.988Z",
+  "title": "Home insurance resource hub | Admiral",
+  "template": "resources-hub",
+  "blocks": [
+    "hero-promo",
+    "cards-teaser",
+    "cards-teaser",
+    "cards-teaser",
+    "cards-teaser",
+    "cards-teaser",
+    "cards-teaser",
+    "cards-teaser"
+  ]
+}

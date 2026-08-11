@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.admiral.com/magazine/guides/motor/10-ways-to-make-your-car-last-longer",
+  "path": "magazine/guides/motor/10-ways-to-make-your-car-last-longer",
+  "timestamp": "2026-08-10T16:01:16.340Z",
+  "title": "10 Ways to Make Your Car Last Longer | Admiral",
+  "template": "magazine-article",
+  "blocks": [
+    "cards-byline",
+    "cards-bio",
+    "cards-teaser",
+    "hero-callout"
+  ]
+}

@@ -73,8 +73,10 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  // megamenu sections always start collapsed — on mobile they act as tap-to-open
+  // accordions, on desktop they open via hover (never stuck open via aria-expanded).
+  toggleAllNavSections(navSections, 'false');
+  if (button) button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -169,16 +171,38 @@ async function buildBreadcrumbs() {
 }
 
 /**
+ * Wraps the megamenu trigger label (leading text node of a nav-drop <li>) in a
+ * <span> so it can be styled and given a caret independently of the panel <ul>.
+ * @param {Element} navSection A top-level nav <li>
+ */
+function wrapDropLabel(navSection) {
+  const firstNode = navSection.firstChild;
+  if (firstNode && firstNode.nodeType === Node.TEXT_NODE && firstNode.textContent.trim()) {
+    const span = document.createElement('span');
+    span.className = 'nav-drop-label';
+    span.textContent = firstNode.textContent.trim();
+    navSection.replaceChild(span, firstNode);
+  }
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment — dual-fetch: local (/content/nav) then DA/EDS (metadata path)
+  // load nav as fragment — metadata override wins; otherwise prefer /content/nav
+  // for content-tree layouts (migrated pages served under /content/) and fall back
+  // to /nav at the site root for a standard DA/EDS deploy.
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/content/nav';
+  let navPath = '/nav';
+  if (navMeta) {
+    navPath = new URL(navMeta, window.location).pathname;
+  } else if (window.location.pathname.startsWith('/content/')) {
+    navPath = '/content/nav';
+  }
   let fragment = await loadFragment(navPath);
   if (!fragment || !fragment.firstElementChild) {
-    fragment = await loadFragment('/nav');
+    fragment = await loadFragment(navPath === '/content/nav' ? '/nav' : '/content/nav');
   }
 
   // decorate nav DOM
@@ -194,7 +218,7 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand && navBrand.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
@@ -203,24 +227,26 @@ export default async function decorate(block) {
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
+      if (navSection.querySelector('ul')) {
+        navSection.classList.add('nav-drop');
+        wrapDropLabel(navSection);
+      }
+      navSection.addEventListener('click', (e) => {
+        // let clicks on real links (top-level plain links and panel links) navigate
+        if (e.target.closest('a')) return;
+        // only megamenu triggers toggle
+        if (!navSection.classList.contains('nav-drop')) return;
+        // desktop opens on hover (CSS); reserve click toggling for mobile accordion
+        if (isDesktop.matches) return;
+        e.preventDefault();
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
     });
   }
 
   const navTools = nav.querySelector('.nav-tools');
-  if (navTools) {
-    const search = navTools.querySelector('a[href*="search"]');
-    if (search && search.textContent === '') {
-      search.setAttribute('aria-label', 'Search');
-    }
-  }
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
@@ -229,7 +255,22 @@ export default async function decorate(block) {
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
+
+  // Build the two Admiral header bands:
+  //  - utility bar (dark strip, top): the nav-tools links
+  //  - primary bar (white): hamburger + brand + primary nav sections / megamenus
+  const utilityBar = document.createElement('div');
+  utilityBar.className = 'nav-utility';
+  if (navTools) utilityBar.append(navTools);
+
+  const primaryBar = document.createElement('div');
+  primaryBar.className = 'nav-primary';
+  primaryBar.append(hamburger);
+  if (navBrand) primaryBar.append(navBrand);
+  if (navSections) primaryBar.append(navSections);
+
+  nav.append(utilityBar, primaryBar);
+
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);

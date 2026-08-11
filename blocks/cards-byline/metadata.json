@@ -1,0 +1,42 @@
+{
+  "variantName": "cards-byline",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:55:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/magazine/guides/motor/10-ways-to-make-your-car-last-longer",
+    "originPage": "Admiral magazine article (10 ways to make your car last longer)",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "byline",
+    "imagePattern": "avatar"
+  },
+  "contentPattern": {
+    "structure": "small circular author avatar + author name + publish/updated/read-time line + row of social share icons",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "cardCount": 1,
+    "shareLinkCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "editorial article bylines (author avatar + name + date/read-time + share links) at the top of a story",
+      "compact one-line author attribution strips with an inline share-icon row",
+      "magazine/blog post meta strips"
+    ],
+    "notSuitableFor": [
+      "author identity pods with a full descriptive bio paragraph (use cards-bio)",
+      "team / people grids with role + socials (use cards-team)",
+      "article teaser grids with image + title + description (use cards-teaser)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/magazine/guides/motor/10-ways-to-make-your-car-last-longer"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:55:00.000Z",
+    "notes": "NEW variant created for the Admiral magazine article byline strip: circular Gareth Herincx avatar, name, '23 March 2020 | Updated 1 December 2025 | 5 minute read', and Facebook/X/email/native-share icon links. Closest existing variant cards-team scored ~0.23 (people grid with role+socials, no date line, not a single-item horizontal strip) - below the 0.8 reuse threshold. Share links are static (href='#' / mailto:); forms are out of scope."
+  }
+}

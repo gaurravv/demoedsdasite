@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.admiral.com/help-support-hub/money-worries/money-management",
+  "path": "help-support-hub/money-worries/money-management",
+  "timestamp": "2026-08-10T16:03:25.569Z",
+  "title": "Money Management Advice & Support | Money Worries | Admiral",
+  "template": "help-support",
+  "blocks": [
+    "hero-promo",
+    "cards-support"
+  ]
+}

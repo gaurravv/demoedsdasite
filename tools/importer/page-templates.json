@@ -6,222 +6,146 @@
     {
       "name": "home",
       "urls": [
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en.html"
+        "https://www.admiral.com/"
       ],
-      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en.html",
       "coverageGaps": [],
-      "description": "Homepage with hero carousel, featured article teaser, article list, promo banner, and adventure list.",
+      "description": "Admiral homepage: promo hero banner, product grid (insurance product pods), TV advert video embed, scam-warning callout, 3-up teaser cards, awards/testimonials carousel, 'get to know us' rich text, and app-download promo.",
       "blocks": [
         {
-          "name": "carousel-hero",
+          "name": "hero-promo",
           "instances": [
-            ".carousel.cmp-carousel--hero"
+            ".hero-banner"
+          ]
+        },
+        {
+          "name": "cards-product",
+          "instances": [
+            ".product-grid"
+          ]
+        },
+        {
+          "name": "embed-video",
+          "instances": [
+            "#schema-videoobject"
+          ]
+        },
+        {
+          "name": "hero-callout",
+          "instances": [
+            ".sub-hero-banner--person-infront-house",
+            ".sub-hero-banner--admiral-app"
           ]
         },
         {
           "name": "cards-teaser",
           "instances": [
-            ".cmp-layout-container--fixed:has(#title-c2d2b28d00) .image-list .cmp-image-list",
-            ".cmp-layout-container--fixed:has(#title-ca6ac0fe65) .image-list .cmp-image-list"
+            "#product-pods-5856 .grid"
           ]
         },
         {
-          "name": "hero-promo",
+          "name": "hero-award",
           "instances": [
-            ".cmp-teaser--hero.cmp-teaser--imagebottom"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "section-1-hero-carousel",
-          "name": "Hero Carousel",
-          "selector": ".carousel.cmp-carousel--hero",
-          "style": null,
-          "blocks": [
-            "carousel-hero"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "section-2-recent-articles",
-          "name": "Recent Articles",
-          "selector": ".cmp-layout-container--fixed:has(#title-c2d2b28d00)",
-          "style": null,
-          "blocks": [
-            "cards-teaser"
-          ],
-          "defaultContent": [
-            ".cmp-title--underline:has(#title-c2d2b28d00)",
-            ".button.cmp-button--primary:has(#button-2e6d32893a)"
+            ".custom-banner.dark-blue"
           ]
         },
         {
-          "id": "section-3-next-adventures-heading",
-          "name": "Next Adventures heading",
-          "selector": ".cmp-title--underline:has(#title-971080d74b)",
-          "style": null,
-          "blocks": [],
-          "defaultContent": [
-            ".cmp-title--underline:has(#title-971080d74b)"
-          ]
-        },
-        {
-          "id": "section-4-climbing-new-zealand-promo",
-          "name": "Climbing New Zealand Promo Teaser",
-          "selector": ".cmp-teaser--hero.cmp-teaser--imagebottom",
-          "style": null,
-          "blocks": [
-            "hero-promo"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "section-5-adventures-list",
-          "name": "Where do you want to go? (Adventures list)",
-          "selector": ".cmp-layout-container--fixed:has(#title-ca6ac0fe65)",
-          "style": null,
-          "blocks": [
-            "cards-teaser"
-          ],
-          "defaultContent": [
-            "#title-ca6ac0fe65",
-            ".button.cmp-button--primary:has(#button-b6562c963d)"
+          "name": "carousel-quote",
+          "instances": [
+            ".testimonials-slider"
           ]
         }
       ]
     },
     {
-      "name": "magazine-listing",
+      "name": "car-insurance-landing",
       "urls": [
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine.html"
+        "https://www.admiral.com/car-insurance"
       ],
-      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine.html",
       "coverageGaps": [],
-      "description": "Magazine landing page with featured article, article card list, and members-only teasers.",
+      "description": "Insurance product landing page: hero with quote CTAs, quick-links, feature cards ('why choose'), rich-text explainers, cover-comparison table, optional-extras teaser cards, related-product cards, quote-requirements accordions, expert quote, claims steps columns, useful-guides cards, FAQ accordions, and other-options link list.",
       "blocks": [
+        {
+          "name": "section-quicklinks",
+          "instances": [
+            "#basic-18928"
+          ],
+          "section": "dark"
+        },
+        {
+          "name": "section-do-i-need",
+          "instances": [
+            "#basic-18610"
+          ],
+          "section": "accent-light"
+        },
+        {
+          "name": "section-quote-requirements",
+          "instances": [
+            "#basic-17125"
+          ],
+          "section": "accent-light"
+        },
+        {
+          "name": "section-experts",
+          "instances": [
+            "#basic-18930"
+          ],
+          "section": "dark"
+        },
         {
           "name": "hero-promo",
           "instances": [
-            "main .teaser.cmp-teaser--featured"
+            ".hero-banner"
+          ]
+        },
+        {
+          "name": "embed-review",
+          "instances": [
+            ".trustpilot-widget"
+          ]
+        },
+        {
+          "name": "cards-feature",
+          "instances": [
+            "#basic-18609 .grid"
+          ]
+        },
+        {
+          "name": "accordion-faq",
+          "instances": [
+            ".faqs"
+          ]
+        },
+        {
+          "name": "tabs-cover",
+          "instances": [
+            "#basic-15950"
+          ]
+        },
+        {
+          "name": "table-compare",
+          "instances": [
+            "#basic-15950 table.table"
           ]
         },
         {
           "name": "cards-teaser",
           "instances": [
-            "main .image-list.list .cmp-image-list"
+            "#basic-17124 .product-pod-style",
+            "#basic-14598 .grid",
+            "#basic-18934 .grid"
           ]
         },
         {
-          "name": "cards-locked",
+          "name": "quote-expert",
           "instances": [
-            "main .teaser.cmp-teaser--secure"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "section-1-title-featured",
-          "name": "Page Title + Featured Article",
-          "selector": [
-            "main .title:has(#title-e83f9afeef)",
-            "main .teaser.cmp-teaser--featured"
-          ],
-          "style": null,
-          "blocks": [
-            "hero-promo"
-          ],
-          "defaultContent": [
-            "main .title:has(#title-e83f9afeef)"
+            ".quote-box"
           ]
         },
         {
-          "id": "section-2-all-articles",
-          "name": "All Articles",
-          "selector": [
-            "main .title:has(#title-0f80375ce9)",
-            "main .image-list.list"
-          ],
-          "style": null,
-          "blocks": [
-            "cards-teaser"
-          ],
-          "defaultContent": [
-            "main .title.cmp-title--underline:has(#title-0f80375ce9)"
-          ]
-        },
-        {
-          "id": "section-3-members-only",
-          "name": "Members Only",
-          "selector": [
-            "main .title:has(#title-59d441f861)",
-            "main .text:has(#text-bb7bdee5e8)",
-            "main .teaser.cmp-teaser--secure"
-          ],
-          "style": null,
-          "blocks": [
-            "cards-locked"
-          ],
-          "defaultContent": [
-            "main .title.cmp-title--underline:has(#title-59d441f861)",
-            "main .text:has(#text-bb7bdee5e8)"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "adventures-listing",
-      "urls": [
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures.html"
-      ],
-      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures.html",
-      "coverageGaps": [],
-      "description": "Adventures landing page with intro, filterable tabbed category list, and adventure card grid.",
-      "blocks": [
-        {
-          "name": "hero-intro",
+          "name": "columns-steps",
           "instances": [
-            ".teaser.cmp-teaser--hero"
-          ]
-        },
-        {
-          "name": "cards-teaser",
-          "instances": [
-            "#tabs-b4210c6ff3-item-4b59a3dfcf-tabpanel .image-list .cmp-image-list"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "section-1-page-title",
-          "name": "Page Title",
-          "selector": ".cmp-layout-container--fixed:has(#title-e8e3276d1e)",
-          "style": null,
-          "blocks": [],
-          "defaultContent": [
-            ".title:has(#title-e8e3276d1e)"
-          ]
-        },
-        {
-          "id": "section-2-intro-promo",
-          "name": "Intro Promo",
-          "selector": ".teaser.cmp-teaser--hero",
-          "style": null,
-          "blocks": [
-            "hero-intro"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "section-3-current-adventures",
-          "name": "Current Adventures",
-          "selector": ".cmp-layout-container--fixed:has(#title-dffa0ffaf3)",
-          "style": null,
-          "blocks": [
-            "cards-teaser"
-          ],
-          "defaultContent": [
-            ".title.cmp-title--underline:has(#title-dffa0ffaf3)"
+            "#basic-18933 .grid--badges"
           ]
         }
       ]
@@ -229,190 +153,85 @@
     {
       "name": "magazine-article",
       "urls": [
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/western-australia.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/arctic-surfing.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/san-diego-surf.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/ski-touring.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/guide-la-skateparks.html"
+        "https://www.admiral.com/magazine/guides/motor/10-ways-to-make-your-car-last-longer"
       ],
-      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/western-australia.html",
       "coverageGaps": [],
-      "description": "Magazine article detail page with title, hero image, and rich article body content.",
-      "blocks": []
-    },
-    {
-      "name": "adventure-detail",
-      "urls": [
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/climbing-new-zealand.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/bali-surf-camp.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/beervana-portland.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/colorado-rock-climbing.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/cycling-southern-utah.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/cycling-tuscany.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/downhill-skiing-wyoming.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/gastronomic-marais-tour.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/napa-wine-tasting.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/riverside-camping-australia.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/ski-touring-mont-blanc.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/surf-camp-costa-rica.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/tahoe-skiing.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/west-coast-cycling.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/whistler-mountain-biking.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/yosemite-backpacking.html"
-      ],
-      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures/climbing-new-zealand.html",
-      "coverageGaps": [],
-      "description": "Adventure detail page with title, hero image, activity metadata (price, duration, difficulty), description body, and image gallery.",
+      "description": "Editorial long-form article: title header, article-contents jump list, author byline with share links, hero image, rich-text body with H2 sections, author bio, share block, related-articles cards, and product CTA.",
       "blocks": [
         {
-          "name": "carousel-gallery",
+          "name": "cards-byline",
           "instances": [
-            ".carousel.cmp-carousel--mini",
-            ".carousel.panelcontainer.cmp-carousel--mini"
+            ".story__meta"
           ]
         },
         {
-          "name": "columns-spec",
+          "name": "cards-bio",
           "instances": [
-            ".contentfragment.cmp-contentfragment--elements"
+            ".story__expert"
           ]
         },
         {
-          "name": "tabs-detail",
+          "name": "cards-teaser",
           "instances": [
-            ".tabs.panelcontainer"
-          ]
-        }
-      ],
-      "sections": [
-        {
-          "id": "section-1-hero-carousel",
-          "name": "Hero Image Carousel",
-          "selector": [
-            ".carousel.cmp-carousel--mini",
-            ".carousel.panelcontainer.cmp-carousel--mini"
-          ],
-          "style": null,
-          "blocks": [
-            "carousel-gallery"
-          ],
-          "defaultContent": []
-        },
-        {
-          "id": "section-2-title",
-          "name": "Adventure Title",
-          "selector": ".cmp-layout-container--fixed .title.cmp-title--underline:has(#title-f8517d742e)",
-          "style": null,
-          "blocks": [],
-          "defaultContent": [
-            ".title.cmp-title--underline:has(#title-f8517d742e)"
+            ".views-element-container .grid"
           ]
         },
         {
-          "id": "section-3-activity-spec-panel",
-          "name": "Activity Spec Panel + Share",
-          "selector": ".contentfragment.cmp-contentfragment--elements:has(#contentfragment-71006a1398)",
-          "style": null,
-          "blocks": [
-            "columns-spec"
-          ],
-          "defaultContent": [
-            ".title:has(#title-d7d1b86df7)",
-            ".sharing"
+          "name": "hero-callout",
+          "instances": [
+            ".hero-banner"
           ]
-        },
-        {
-          "id": "section-4-tabbed-body",
-          "name": "Tabbed Description Body",
-          "selector": ".tabs.panelcontainer:has(#tabs-3e2a3c8c36)",
-          "style": null,
-          "blocks": [
-            "tabs-detail"
-          ],
-          "defaultContent": []
         }
       ]
     },
     {
-      "name": "content-page",
+      "name": "resources-hub",
       "urls": [
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/about-us.html",
-        "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/faqs.html"
+        "https://www.admiral.com/resources/home-hub"
       ],
-      "representativeUrl": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/about-us.html",
-      "coverageGaps": [
-        {
-          "url": "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/faqs.html",
-          "sections": [
-            { "sectionSignature": "faq-accordion", "nodeMapId": "rc2" }
-          ]
-        }
-      ],
-      "description": "Simple content page with title and rich text body (About Us, FAQs).",
+      "coverageGaps": [],
+      "description": "Content hub/listing page: hero intro, grid of category teaser cards linking to article sub-hubs, and a policy-books link list.",
       "blocks": [
         {
-          "name": "cards-team",
+          "name": "hero-promo",
           "instances": [
-            "section.cmp-experience-fragment--contributor:has(.cmp-experiencefragment--stacey-roswells), section.cmp-experience-fragment--contributor:has(.cmp-experiencefragment--jake-hammer), section.cmp-experience-fragment--contributor:has(.cmp-experiencefragment--ian-provo), section.cmp-experience-fragment--contributor:has(.cmp-experiencefragment--jacob-wester)",
-            "section.cmp-experience-fragment--contributor:has(.cmp-experiencefragment--sofia-sjoeberg), section.cmp-experience-fragment--contributor:has(.cmp-experiencefragment--justin-barr), section.cmp-experience-fragment--contributor:has(.cmp-experiencefragment--kumar-selveraj)"
+            ".hero-banner"
           ]
         },
         {
-          "name": "accordion-faq",
+          "name": "cards-teaser",
           "instances": [
-            ".accordion.panelcontainer .cmp-accordion"
+            "#basic-16349 .product-pod-style"
           ]
         }
+      ]
+    },
+    {
+      "name": "help-support",
+      "urls": [
+        "https://www.admiral.com/help-support-hub/money-worries/money-management"
       ],
-      "sections": [
+      "coverageGaps": [],
+      "description": "Support/informational page: hero intro, rich-text guidance with H2/H3 sub-headings and external resource links, contact-us card list, and 'more support' teaser cards grid.",
+      "blocks": [
         {
-          "id": "section-1-page-title",
-          "name": "About Us Page Title",
-          "selector": ".title:has(#title-9b21773b1d)",
-          "style": null,
-          "blocks": [],
-          "defaultContent": [
-            ".title:has(#title-9b21773b1d)"
+          "name": "section-more-support",
+          "instances": [
+            "#basic-18374 .bg-fino"
+          ],
+          "section": "accent"
+        },
+        {
+          "name": "hero-promo",
+          "instances": [
+            ".hero-banner"
           ]
         },
         {
-          "id": "section-2-our-contributors",
-          "name": "Our Contributors",
-          "selector": ".cmp-title--underline:has(#title-f9f617a322)",
-          "style": null,
-          "blocks": [
-            "cards-team"
-          ],
-          "defaultContent": [
-            ".cmp-title--underline:has(#title-f9f617a322)",
-            ".text:has(#text-e5578214d4)"
+          "name": "cards-support",
+          "instances": [
+            "#basic-18374 .grid"
           ]
-        },
-        {
-          "id": "section-3-wknd-guides",
-          "name": "WKND Guides",
-          "selector": ".cmp-title--underline:has(#title-439468b079)",
-          "style": null,
-          "blocks": [
-            "cards-team"
-          ],
-          "defaultContent": [
-            ".cmp-title--underline:has(#title-439468b079)",
-            ".text:has(#text-7e8f28d193)"
-          ]
-        },
-        {
-          "id": "section-4-faqs-accordion",
-          "name": "FAQs Accordion (coverage gap)",
-          "selector": [
-            ".accordion.panelcontainer .cmp-accordion",
-            ".accordion.panelcontainer"
-          ],
-          "style": null,
-          "blocks": [
-            "accordion-faq"
-          ],
-          "defaultContent": []
         }
       ]
     }

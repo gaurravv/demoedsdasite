@@ -1,0 +1,235 @@
+/* carousel-quote — Admiral testimonials slider
+   Values extracted from computed styles of .testimonials-slider on admiral.com.
+   Layout: centered single quote, decorative quote marks, circular avatar with
+   flanking rules, blue author + grey location, thin chevron prev/next arrows. */
+
+/* Decorative quote-mark + avatar assets (Admiral CDN, used by source) */
+.carousel-quote {
+  --cq-quote-open: url("https://mktgblobpubaccess1.blob.core.windows.net/eui-frontend-assets/admiral/images/icons/icon-testimonial-quote-open-dark.svg");
+  --cq-quote-close: url("https://mktgblobpubaccess1.blob.core.windows.net/eui-frontend-assets/admiral/images/icons/icon-testimonial-quote-close-dark.svg");
+  --cq-avatar: url("https://mktgblobpubaccess1.blob.core.windows.net/eui-frontend-assets/admiral/images/testimonial-user.svg");
+  --cq-arrow-prev: url("https://mktgblobpubaccess1.blob.core.windows.net/eui-frontend-assets/admiral/images/testimonials/slick-arrow-prev.svg");
+  --cq-arrow-next: url("https://mktgblobpubaccess1.blob.core.windows.net/eui-frontend-assets/admiral/images/testimonials/slick-arrow-next.svg");
+  --cq-orange: #ff7911;
+
+  position: relative;
+  max-width: 708px;
+  margin: 0 auto 29px;
+  padding: 0 25px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+/* Decorative background quotation marks (mobile: scaled down) */
+.carousel-quote::before,
+.carousel-quote::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 81px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.carousel-quote::before {
+  top: -12px;
+  left: 6px;
+  background-image: var(--cq-quote-open);
+}
+
+.carousel-quote::after {
+  top: 60px;
+  right: 6px;
+  background-image: var(--cq-quote-close);
+}
+
+/* --- Slider mechanics (kept from EDS carousel decorate) --- */
+.carousel-quote .carousel-quote-slides-container {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-quote .carousel-quote-slides {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-quote .carousel-quote-slides::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Slide: centered column (quote, avatar, author, location) --- */
+.carousel-quote .carousel-quote-slide {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 20px 8px;
+}
+
+/* content cell dissolves so its children interleave with the avatar cell */
+.carousel-quote .carousel-quote-slide-content {
+  display: contents;
+}
+
+/* Quote text — full width so long quotes wrap instead of overflowing */
+.carousel-quote .carousel-quote-slide-content > p:first-child {
+  order: 1;
+  width: 100%;
+  margin: 0;
+  color: #ee5615;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* Avatar (empty image cell rendered purely in CSS) */
+.carousel-quote .carousel-quote-slide-image {
+  order: 2;
+  position: relative;
+  flex: 0 0 auto;
+  width: 74px;
+  height: 74px;
+  margin: 25px auto 17px;
+  border-radius: 50%;
+  background-color: var(--cq-orange);
+  background-image: var(--cq-avatar);
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: 53.3px 58.4px;
+}
+
+/* Flanking horizontal rules on each side of the avatar */
+.carousel-quote .carousel-quote-slide-image::before,
+.carousel-quote .carousel-quote-slide-image::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 1px;
+  background-color: var(--cq-orange);
+}
+
+.carousel-quote .carousel-quote-slide-image::before {
+  right: calc(100% + 15px);
+}
+
+.carousel-quote .carousel-quote-slide-image::after {
+  left: calc(100% + 15px);
+}
+
+/* Author name */
+.carousel-quote .carousel-quote-slide-content > h3 {
+  order: 3;
+  margin: -4px 0 0;
+  color: var(--link-color);
+  font-size: 19.8px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+/* Location */
+.carousel-quote .carousel-quote-slide-content > p:last-child {
+  order: 4;
+  margin: -6px 0 0;
+  color: var(--text-color);
+  font-size: 18px;
+  line-height: 28px;
+}
+
+/* --- Prev / Next chevron arrows (thin SVG, edges of the block) --- */
+.carousel-quote .carousel-quote-navigation-buttons {
+  position: absolute;
+  top: 50%;
+  left: -18px;
+  right: -18px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-quote .carousel-quote-navigation-buttons button {
+  width: 13px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 13px 26px;
+  font-size: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: opacity 0.2s;
+}
+
+.carousel-quote .carousel-quote-navigation-buttons button:hover,
+.carousel-quote .carousel-quote-navigation-buttons button:focus-visible {
+  background-color: transparent;
+  opacity: 0.6;
+}
+
+.carousel-quote .carousel-quote-navigation-buttons button.slide-prev {
+  background-image: var(--cq-arrow-prev);
+}
+
+.carousel-quote .carousel-quote-navigation-buttons button.slide-next {
+  background-image: var(--cq-arrow-next);
+}
+
+/* Source shows no dot indicators — hide the generated indicator nav */
+.carousel-quote + nav[aria-label],
+.carousel-quote nav[aria-label],
+.carousel-quote .carousel-quote-slide-indicators {
+  display: none;
+}
+
+/* --- Desktop: exact source proportions --- */
+@media (width >= 900px) {
+  .carousel-quote::before,
+  .carousel-quote::after {
+    width: 134px;
+    height: 135px;
+  }
+
+  .carousel-quote::before {
+    top: -29px;
+    left: 29px;
+  }
+
+  .carousel-quote::after {
+    top: 90px;
+    right: 27px;
+  }
+
+  .carousel-quote .carousel-quote-slide {
+    padding: 24px 60px 8px;
+  }
+
+  .carousel-quote .carousel-quote-slide-content > p:first-child {
+    font-size: 25.2px;
+    line-height: 34px;
+  }
+
+  .carousel-quote .carousel-quote-slide-image::before,
+  .carousel-quote .carousel-quote-slide-image::after {
+    width: 105px;
+  }
+}

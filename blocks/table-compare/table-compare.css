@@ -1,0 +1,110 @@
+/* Block: table-compare — Admiral cover-comparison table.
+   Values extracted from admiral.com computed styles (#basic-15950 table).
+
+   Works in two shapes:
+   1. Standalone decorated block  -> div.table-compare  > table
+   2. Raw <table> imported inside a tabs-cover panel -> .tabs-cover-panel table
+   Selectors below match BOTH so the design applies wherever the table lives. */
+
+/* ---------------------------------------------------------------- table root */
+.table-compare,
+.tabs-cover-panel {
+  /* enable horizontal scroll on narrow screens (the panel already sets this,
+     repeated here so the standalone block scrolls too) */
+  overflow-x: auto;
+}
+
+.table-compare table,
+.tabs-cover-panel table {
+  width: 100%;
+  min-width: 600px;                 /* forces horizontal scroll on mobile */
+  border-collapse: collapse;
+  color: var(--text-color);         /* rgb(79, 79, 79) */
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+}
+
+/* The imported "Table Compare" caption row is a structural artifact — hide it */
+.table-compare table thead,
+.tabs-cover-panel table thead {
+  display: none;
+}
+
+/* ------------------------------------------------------ every header/body cell */
+.table-compare table th,
+.table-compare table td,
+.tabs-cover-panel table th,
+.tabs-cover-panel table td {
+  padding: 12px 8px;
+  border: 1px solid rgb(160 160 180);
+  background-color: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* --------------------------------------- tier header row (first row in tbody) */
+.table-compare table tbody tr:first-child td,
+.tabs-cover-panel table tbody tr:first-child td {
+  padding: 14px 8px;
+  font-weight: 700;
+}
+
+/* Cut-out top-left corner cell (empty, no border, no fill) */
+.table-compare table tbody tr:first-child td:first-child,
+.tabs-cover-panel table tbody tr:first-child td:first-child {
+  border: 0;
+  background-color: transparent;
+}
+
+/* ---------------------------------------- feature-label column (first column) */
+.table-compare table tbody td:first-child,
+.tabs-cover-panel table tbody td:first-child {
+  padding: 14px 18px;
+  text-align: left;
+}
+
+.table-compare table tbody td:first-child h3,
+.tabs-cover-panel table tbody td:first-child h3 {
+  margin: 0;
+  font-size: var(--body-font-size-m);   /* 18px */
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--link-color);             /* rgb(35, 80, 160) — Admiral link blue */
+}
+
+/* ------------------------------------------------ coverage cells (data columns)
+   Ticks (✓) and "Optional" render in Admiral positive-green. Value cells that
+   contain paragraphs are overridden to grey below. */
+.table-compare table tbody tr:not(:first-child) td:not(:first-child),
+.tabs-cover-panel table tbody tr:not(:first-child) td:not(:first-child) {
+  color: rgb(0 146 39);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Grey cross for cells with no cover (empty in the imported markup) */
+.table-compare table tbody tr:not(:first-child) td:not(:first-child):empty::after,
+.tabs-cover-panel table tbody tr:not(:first-child) td:not(:first-child):empty::after {
+  content: '✕';
+  color: rgb(160 160 180);
+  font-weight: 400;
+}
+
+/* "Up to £X" value cells: stacked, grey, regular weight */
+.table-compare table tbody td p,
+.tabs-cover-panel table tbody td p {
+  margin: 0;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 300;
+  line-height: 22px;
+}
+
+/* --------------------------------------------------------------- desktop tune */
+@media (width >= 900px) {
+  .table-compare table td:first-child h3,
+  .tabs-cover-panel table td:first-child h3 {
+    font-size: var(--body-font-size-m);
+  }
+}

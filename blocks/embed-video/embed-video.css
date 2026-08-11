@@ -1,0 +1,86 @@
+/* Block: embed-video
+ * Design migrated from https://www.admiral.com/ (#schema-videoobject).
+ * Source is a bare, centered, responsive 16:9 video embed with NO background,
+ * border, rounded corners, or shadow. On desktop the video content width is
+ * capped at 708px (inside the site's fixed ~768px content column).
+ * The JS decorates the cell into `<div style="padding-bottom:56.25%"> > iframe`,
+ * so the responsive 16:9 aspect ratio is produced by inline styles.
+ */
+
+.embed-video {
+  max-width: 708px;                /* source video content width at desktop */
+  margin: 32px auto;               /* centered; vertical rhythm between heading and next section */
+  padding: 0;
+  background-color: transparent;   /* source: rgba(0, 0, 0, 0) */
+  border: 0;
+  border-radius: 0;                /* source has square corners */
+  box-shadow: none;                /* source has no shadow */
+  text-align: center;
+}
+
+/* Responsive 16:9 wrapper produced by the block JS: keep it centered and
+   full width of the (max-width capped) block. Aspect ratio comes from the
+   inline `padding-bottom: 56.25%` set in embed-video.js. */
+.embed-video > div {
+  display: flex;
+  justify-content: center;
+}
+
+.embed-video iframe {
+  border: 0;                       /* matches the inline border:0 on the live embed */
+}
+
+/* Twitter/X embeds render an injected node; keep it centered too. */
+.embed-video.embed-video-twitter .twitter-tweet-rendered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Click-to-play placeholder variant (used when the cell contains a
+   poster image instead of a plain link). Unstyled chrome to match the
+   source's clean video treatment. --- */
+.embed-video .embed-video-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.embed-video .embed-video-placeholder > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+
+.embed-video .embed-video-placeholder picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.embed-video .embed-video-placeholder-play button {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(3);
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 20px;
+  padding: 0;
+}
+
+.embed-video .embed-video-placeholder-play button::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0;
+  height: 10px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid;
+  top: 4px;
+  left: 7px;
+}
