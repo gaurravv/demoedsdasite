@@ -2,33 +2,42 @@
 /* global WebImporter */
 /**
  * Parser for hero-promo. Base: hero.
- * Source: https://publish-p133255-e1921317.adobeaemcloud.com/us/en.html
- * Structure: 1 column. Row 1 = block name. Row 2 = background image. Row 3 = content
- * (optional pretitle, title, subheading, and Read More CTA).
+ * Source: admiral.com hero banners (.hero-banner) — home, car-insurance, resources, help-support.
+ * Library convention: Hero = 1 column, 3 rows (name / background image / title+subheading+CTA).
+ * Handles: 0, 1 or 2 CTAs; optional h1 page title above the copy heading; optional subheading.
  */
 export default function parse(element, { document }) {
-  const img = element.querySelector('.cmp-teaser__image img, .cmp-image__image, img');
-  const pretitle = element.querySelector('.cmp-teaser__pretitle, [class*="pretitle"]');
-  const heading = element.querySelector('.cmp-teaser__title, h1, h2, h3, [class*="title"]');
-  const description = element.querySelector('.cmp-teaser__description, [class*="description"], p');
-  const cta = element.querySelector('.cmp-teaser__action-link, .cmp-teaser__action-container a, a.cmp-button');
+  // Background image: prefer the dedicated hero image container, else first standalone image.
+  const bgImage = element.querySelector('.hero-banner__image img')
+    || element.querySelector(':scope > img')
+    || element.querySelector('img');
+
+  // Headings (page title h1 and/or copy heading h2/h3), in document order.
+  const headings = Array.from(element.querySelectorAll('h1, h2, h3'));
+
+  // Body paragraphs (exclude any that live inside a CTA container).
+  const paragraphs = Array.from(element.querySelectorAll('p'))
+    .filter((p) => !p.closest('.buttons, .buttons__flex, .app-icons'));
+
+  // CTA links: prefer explicit button containers; fall back to standalone .button links.
+  let ctaLinks = Array.from(element.querySelectorAll('.buttons a, .buttons__flex a'));
+  if (ctaLinks.length === 0) {
+    ctaLinks = Array.from(element.querySelectorAll('a.button'));
+  }
 
   // Empty-block guard.
-  if (!heading && !description && !img) {
+  if (headings.length === 0 && paragraphs.length === 0) {
     element.replaceWith(...element.childNodes);
     return;
   }
 
   const cells = [];
-  // Row 2: background image.
-  if (img) cells.push([img]);
+  if (bgImage) cells.push([bgImage]);
 
-  // Row 3: content cell.
   const contentCell = [];
-  if (pretitle) contentCell.push(pretitle);
-  if (heading) contentCell.push(heading);
-  if (description) contentCell.push(description);
-  if (cta) contentCell.push(cta);
+  headings.forEach((h) => contentCell.push(h));
+  paragraphs.forEach((p) => contentCell.push(p));
+  ctaLinks.forEach((a) => contentCell.push(a));
   cells.push([contentCell]);
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'hero-promo', cells });

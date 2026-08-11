@@ -1,0 +1,98 @@
+/* columns-steps — "How to make a claim" style numbered process steps.
+   Source: admiral.com/car-insurance (#basic-18933 .grid--badges).
+   Each step = an aqua right-pointing "Step N" arrow badge, a brand-blue title
+   and a short centred description. The source badge is a decorative SVG image;
+   the EDS content carries no image, so the badge is recreated in CSS via a
+   counter + clip-path arrow tag. Values extracted from source computed styles. */
+
+/* Row: mobile-first single column, steps stacked and centred. */
+.columns-steps > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  counter-reset: step;
+  text-align: center;
+}
+
+/* Cell = one step. */
+.columns-steps > div > div {
+  counter-increment: step;
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+
+/* Step badge — aqua arrow tag reading "Step N".
+   Colours: fill rgb(119,221,255) #77ddff (Admiral aqua),
+   text rgb(0,84,133) #005485 (brand blue). SVG aspect ~189:64. */
+.columns-steps > div > div::before {
+  content: "Step " counter(step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 140px;
+  height: 48px;
+  margin: 0 auto 22px;
+  padding-right: 22px; /* offset the arrow point so the label sits in the body */
+  background-color: #77ddff;
+  color: #005485;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  clip-path: polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%);
+}
+
+/* Title. */
+.columns-steps h3 {
+  margin: 0 0 6px;
+  font-size: 19.8px;
+  font-weight: 600;
+  line-height: 28px;
+  color: rgb(35, 80, 160); /* source #2350a0 = var(--link-color) */
+  text-align: center;
+}
+
+/* Description. */
+.columns-steps p {
+  margin: 0 auto;
+  max-width: 300px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  color: rgb(79, 79, 79); /* source #4f4f4f = var(--text-color) */
+  text-align: center;
+}
+
+.columns-steps p a:any-link {
+  color: var(--link-color);
+  font-weight: 400;
+}
+
+/* Desktop: three equal columns side by side, larger badge. */
+@media (width >= 900px) {
+  .columns-steps > div {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .columns-steps > div > div {
+    flex: 1 1 0;
+    max-width: none;
+    padding: 0 12px;
+  }
+
+  .columns-steps > div > div::before {
+    width: 155px;
+    height: 54px;
+    margin-bottom: 50px;
+    padding-right: 24px;
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "variantName": "cards-support",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-10T14:40:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/help-support-hub/money-worries/money-management",
+    "originPage": "Money management support (help & support hub)",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "accent",
+    "density": "grid",
+    "purpose": "support-links",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "heading + description + 'more' link (text-only card, no image)",
+    "buttonCount": 0,
+    "linkCount": 1,
+    "imageCount": 0,
+    "cardCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "text-only support/related-topic card grids where each card has a heading, a short description, and a single 'more'/read link",
+      "'More support' / 'see also' link-card grids on informational and help pages",
+      "uniform imageless cards that each navigate to a detail page via a per-card link"
+    ],
+    "notSuitableFor": [
+      "photo teaser cards with a thumbnail image (use cards-teaser)",
+      "text-only stat/benefit tiles with no per-card link (use cards-feature)",
+      "icon + short label product/category link grids (use cards-product)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": [
+      "/help-support-hub/money-worries/money-management"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T14:40:00.000Z",
+    "notes": "Help-support money-management 'More support' section (#basic-18374 .grid, on a pale mint/teal bg-fino section): a 2x2 grid of four white text-only pods (Debt support / How to stay safe online / Cost of living support / Mental health support), each with an H3 heading, a description paragraph, and a per-card 'more' link with a circular-arrow icon. No thumbnail images. Differs from cards-teaser (requires images) and cards-feature (no per-card link)."
+  }
+}

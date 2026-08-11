@@ -1,81 +1,109 @@
 /* eslint-disable */
 /* global WebImporter */
 
-import wkndCleanupTransformer from './transformers/wknd-cleanup.js';
-import wkndSectionsTransformer from './transformers/wknd-sections.js';
+// PARSER IMPORTS
+import cardsBylineParser from './parsers/cards-byline.js';
+import cardsBioParser from './parsers/cards-bio.js';
+import cardsTeaserParser from './parsers/cards-teaser.js';
+import heroCalloutParser from './parsers/hero-callout.js';
 
-const parsers = {};
+// TRANSFORMER IMPORTS
+import cleanupTransformer from './transformers/admiral-cleanup.js';
+import sectionsTransformer from './transformers/admiral-sections.js';
 
-const PAGE_TEMPLATE = {
-  "name": "magazine-article",
-  "description": "Magazine article detail page with title, hero image, and rich article body content.",
-  "urls": [
-    "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/western-australia.html",
-    "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/arctic-surfing.html",
-    "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/san-diego-surf.html",
-    "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/ski-touring.html",
-    "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/guide-la-skateparks.html"
-  ],
-  "blocks": [],
-  "sections": []
+// PARSER REGISTRY
+const parsers = {
+  'cards-byline': cardsBylineParser,
+  'cards-bio': cardsBioParser,
+  'cards-teaser': cardsTeaserParser,
+  'hero-callout': heroCalloutParser,
 };
 
-const transformers = [
-  wkndCleanupTransformer,
-  ...(PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [wkndSectionsTransformer] : []),
-];
+// TRANSFORMER REGISTRY (cleanup before parse, sections after)
+const transformers = [cleanupTransformer, sectionsTransformer];
+
+// PAGE TEMPLATE CONFIGURATION (embedded from page-templates.json)
+const PAGE_TEMPLATE = {
+  name: "magazine-article",
+  description: "Editorial long-form article: title header, article-contents jump list, author byline with share links, hero image, rich-text body with H2 sections, author bio, share block, related-articles cards, and product CTA.",
+  urls: ["https://www.admiral.com/magazine/guides/motor/10-ways-to-make-your-car-last-longer"],
+  blocks: [
+      {
+          "name": "cards-byline",
+          "instances": [
+              ".story__meta"
+          ]
+      },
+      {
+          "name": "cards-bio",
+          "instances": [
+              ".story__expert"
+          ]
+      },
+      {
+          "name": "cards-teaser",
+          "instances": [
+              ".views-element-container .grid"
+          ]
+      },
+      {
+          "name": "hero-callout",
+          "instances": [
+              ".hero-banner"
+          ]
+      }
+  ],
+};
 
 function executeTransformers(hookName, element, payload) {
   const enhancedPayload = { ...payload, template: PAGE_TEMPLATE };
-  transformers.forEach((transformer) => {
+  transformers.forEach((transformerFn) => {
     try {
-      transformer(hookName, element, enhancedPayload);
+      transformerFn.call(null, hookName, element, enhancedPayload);
     } catch (e) {
-      console.warn(`Transformer failed on hook "${hookName}": ${e.message}`);
+      console.error(`Transformer failed at ${hookName}:`, e);
     }
   });
 }
 
 function findBlocksOnPage(document, template) {
-  const found = [];
-  (template.blocks || []).forEach((block) => {
-    (block.instances || []).forEach((selector) => {
+  const pageBlocks = [];
+  template.blocks.forEach((blockDef) => {
+    // Skip section-* entries — those are section-metadata styling, not parseable blocks.
+    if (blockDef.name.startsWith('section-')) return;
+    blockDef.instances.forEach((selector) => {
       const elements = document.querySelectorAll(selector);
-      if (!elements.length) {
-        console.warn(`No elements found for block "${block.name}" with selector "${selector}"`);
-        return;
+      if (elements.length === 0) {
+        console.warn(`Block "${blockDef.name}" selector not found: ${selector}`);
       }
-      const section = (template.sections || []).find((s) => (s.blocks || []).includes(block.name));
       elements.forEach((element) => {
-        found.push({
-          name: block.name,
-          selector,
-          element,
-          section: section ? section.id : null,
-        });
+        pageBlocks.push({ name: blockDef.name, selector, element });
       });
     });
   });
-  return found;
+  console.log(`Found ${pageBlocks.length} block instances on page`);
+  return pageBlocks;
 }
 
 export default {
   transform: (payload) => {
-    const { document, url, html, params } = payload;
+    const { document, url, params } = payload;
     const main = document.body;
 
     executeTransformers('beforeTransform', main, payload);
 
-    const pageBlocks = [];
-
+    const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
     pageBlocks.forEach((block) => {
-      if (!block.element.parentNode) {
-        return;
-      }
-      try {
-        parsers[block.name](block.element, { document, url, params });
-      } catch (e) {
-        console.warn(`Parser "${block.name}" failed: ${e.message}`);
+      if (!block.element.parentNode) return; // already replaced by an earlier parser
+      const parser = parsers[block.name];
+      if (parser) {
+        try {
+          parser(block.element, { document, url, params });
+        } catch (e) {
+          console.error(`Failed to parse ${block.name} (${block.selector}):`, e);
+        }
+      } else {
+        console.warn(`No parser found for block: ${block.name}`);
       }
     });
 
@@ -87,9 +115,10 @@ export default {
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
 
-    const path = WebImporter.FileUtils.sanitizePath(
-      new URL(params.originalURL).pathname.replace(/\/$/, '').replace(/\.html$/, ''),
-    );
+    const rawPath = new URL(params.originalURL).pathname
+      .replace(/\/$/, '')
+      .replace(/\.html?$/, '');
+    const path = WebImporter.FileUtils.sanitizePath(rawPath === '' ? '/index' : rawPath);
 
     return [{
       element: main,

@@ -2,32 +2,85 @@
 /* global WebImporter */
 /**
  * Parser for cards-teaser. Base: cards.
- * Source: https://publish-p133255-e1921317.adobeaemcloud.com/us/en/adventures.html
- * Structure: 2 columns. First row = block name. Each subsequent row is a card:
- * [image | title (linked heading), description].
- * The instances selector matches the `.cmp-image-list` (a <ul>); each `<li>` item is a card.
+ * Source: admiral.com teaser card grids — several shapes across pages:
+ *   - home  #product-pods-5856 .grid       → .grid__cell > .pod.pod--product (image, h3, p, more-link)
+ *   - car   #basic-14598 .grid / #basic-18934 .grid → .pod.pod--product.clearfix (image, h3, p, more-link)
+ *   - car   #basic-17124 .product-pod-style → a.sub-hero-banner.product-pod-style (image, copy>h3/p)  [whole-card link]
+ *   - magazine .views-element-container .grid → a.pod.pod--magazine (image, time, h3)  [whole-card link]
+ *   - resources #basic-16349 .product-pod-style → a.sub-hero-banner.product-pod-style (image, copy>h3/p) [whole-card link]
+ * Library convention: Cards = 2 columns (image | text), one row per card.
+ *   Cell 1: card image.
+ *   Cell 2: title (h3), description (p / time), optional "more" link.
+ * When the card itself is a link (<a>) the whole-card href is re-applied to the title.
  */
 export default function parse(element, { document }) {
-  const items = Array.from(element.querySelectorAll('.cmp-image-list__item, li'));
-  const cells = [];
+  // Collect card items. The selector may resolve to a grid container OR a single
+  // product-pod-style card (union selectors in page-templates use both shapes).
+  let items = Array.from(
+    element.querySelectorAll(
+      ':scope > .grid__cell .pod, :scope .grid__cell .pod, '
+      + ':scope > a.sub-hero-banner, :scope a.sub-hero-banner.product-pod-style, '
+      + ':scope > a.pod--magazine, :scope a.pod--magazine',
+    ),
+  );
 
-  items.forEach((item) => {
-    const img = item.querySelector('.cmp-image-list__item-image img, .cmp-image__image, img');
-    const titleLink = item.querySelector('.cmp-image-list__item-title-link, a[class*="title-link"]');
-    const titleText = item.querySelector('.cmp-image-list__item-title, [class*="item-title"]');
-    const description = item.querySelector('.cmp-image-list__item-description, [class*="description"]');
-
-    const textCell = [];
-    // Preserve the title as a link when available; heading style comes from cards CSS.
-    if (titleLink) {
-      // Keep the link but ensure it wraps the title text.
-      textCell.push(titleLink);
-    } else if (titleText) {
-      textCell.push(titleText);
+  // Fallback: the element itself is a single card (e.g. selector matched one .product-pod-style).
+  if (items.length === 0) {
+    if (element.matches('a.sub-hero-banner, .pod, a.pod--magazine')) {
+      items = [element];
+    } else {
+      items = Array.from(element.querySelectorAll('.pod, a.sub-hero-banner, a.pod--magazine'));
     }
-    if (description) textCell.push(description);
+  }
 
-    cells.push([img || '', textCell.length ? textCell : '']);
+  // De-duplicate (a card could match more than one selector branch).
+  items = items.filter((el, i) => items.indexOf(el) === i);
+
+  const cells = [];
+  items.forEach((item) => {
+    // Whole-card link href, if the card element is itself an anchor.
+    const cardHref = item.tagName === 'A' ? item.getAttribute('href') : null;
+
+    const image = item.querySelector('.image img, img');
+
+    // Text container: .copy for sub-hero-banner cards, otherwise the card itself.
+    const textScope = item.querySelector('.copy') || item;
+    const heading = textScope.querySelector('h2, h3, h4');
+    const time = textScope.querySelector('time');
+    const paragraphs = Array.from(textScope.querySelectorAll('p'))
+      .filter((p) => !p.querySelector('time'));
+    // Explicit "read more" style link inside the card body.
+    const moreLink = item.querySelector('a.more-link, .more-link');
+
+    const contentCell = [];
+
+    if (heading) {
+      if (cardHref) {
+        // Whole-card link: wrap the heading text in a link so the card stays clickable.
+        const link = document.createElement('a');
+        link.setAttribute('href', cardHref);
+        const h = document.createElement((heading.tagName || 'h3').toLowerCase());
+        link.textContent = heading.textContent.trim();
+        h.append(link);
+        contentCell.push(h);
+      } else {
+        contentCell.push(heading);
+      }
+    }
+
+    if (time) {
+      const p = document.createElement('p');
+      p.textContent = time.textContent.trim();
+      contentCell.push(p);
+    }
+
+    paragraphs.forEach((p) => contentCell.push(p));
+    if (moreLink && !cardHref) contentCell.push(moreLink);
+
+    // Skip genuinely empty cards.
+    if (!image && contentCell.length === 0) return;
+
+    cells.push([image || '', contentCell]);
   });
 
   if (cells.length === 0) {

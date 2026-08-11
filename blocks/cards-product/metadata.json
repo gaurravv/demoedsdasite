@@ -1,0 +1,41 @@
+{
+  "variantName": "cards-product",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-10T12:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/",
+    "originPage": "Admiral homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "grid",
+    "purpose": "product",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "circular icon + short product label (whole card links to product page)",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "cardCount": 12
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "product/category navigation grids where each tile is an icon + short label linking to a landing page",
+      "compact icon-driven link grids (insurance products, service categories)",
+      "sets of many uniform clickable tiles with no description text"
+    ],
+    "notSuitableFor": [
+      "photo teaser cards with a heading + description + read-more link (use cards-teaser)",
+      "people/team grids (use cards-team)",
+      "gated/members-only teasers (use cards-locked)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T12:18:00.000Z",
+    "notes": "Admiral homepage 'product pods' grid: 12 insurance product tiles (Car, Home, Pet, MultiCover, MultiCar, Van, Travel, Personal loans, Learner, Landlord, Temp car, Breakdown). Icon-only cards (inline SVG), no body description, whole tile is the link."
+  }
+}

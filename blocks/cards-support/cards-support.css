@@ -1,0 +1,101 @@
+/* cards-support — Admiral "More support" text-only pod grid
+   Source: admiral.com money-management (#basic-18374 .grid > .pod--product)
+   Values from getComputedStyle. Mint accent band comes from the global
+   .section.accent (#e2f4e7); this block only styles the white pods. */
+
+/* --- Grid: 1-up on mobile, 2-up (2x2) from tablet up. 15px gutters. --- */
+.cards-support > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+@media (width >= 900px) {
+  .cards-support > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Card (.pod--product): white pod, hairline border, 4px radius --- */
+.cards-support > ul > li {
+  display: flex;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #b7b7cb;
+  border-radius: 4px;
+}
+
+.cards-support .cards-support-card-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 19px 14px 12px;
+}
+
+/* --- Heading (brand link-blue, not the default #005485 heading blue) --- */
+.cards-support .cards-support-card-body h3 {
+  margin: 0;
+  font-size: 19.8px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--link-color); /* rgb(35, 80, 160) */
+}
+
+/* --- Description --- */
+.cards-support .cards-support-card-body p {
+  margin: 6px 0 0;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+  color: var(--text-color); /* rgb(79, 79, 79) */
+}
+
+/* --- "More" link: EDS auto-decorates the standalone <p><a> into
+   p.button-container > a.button. Reset the solid brand-blue pill back to
+   Admiral's plain arrow-circle text link. --- */
+.cards-support .cards-support-card-body p.button-container {
+  display: block;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+main .cards-support a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--bright-blue); /* rgb(0, 120, 255) */
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+  white-space: normal;
+}
+
+main .cards-support a.button:any-link:hover,
+main .cards-support a.button:any-link:focus {
+  background-color: transparent;
+  color: var(--bright-blue);
+  text-decoration: none;
+}
+
+/* Circular-arrow glyph after the link text (exact source SVG) */
+.cards-support .cards-support-card-body a.button::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  margin-left: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2013%2013%22%3E%3Cpath%20d%3D%22M5.158%203.006L7.52%206.5l-2.363%203.505h1.369L8.889%206.5%206.527%203.006z%22%20fill%3D%22%230078ff%22%20%2F%3E%3Cpath%20d%3D%22M6.5%200a6.5%206.5%200%20100%2013%206.5%206.5%200%20000-13m0%201C9.533%201%2012%203.467%2012%206.5S9.533%2012%206.5%2012A5.506%205.506%200%20011%206.5C1%203.467%203.467%201%206.5%201%22%20fill%3D%22%230078ff%22%20%2F%3E%3C%2Fsvg%3E");
+}

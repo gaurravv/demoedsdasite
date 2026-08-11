@@ -1,0 +1,41 @@
+{
+  "variantName": "embed-review",
+  "baseBlock": "embed",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:30:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/car-insurance",
+    "originPage": "Car insurance landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "review-widget",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "single external widget/profile URL rendered as a centered third-party embed",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "widgetCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "third-party review / social-proof widgets referenced by URL (Trustpilot, Feefo, review banners)",
+      "script-driven rating widgets embedded via a profile/review URL",
+      "compact centered embeds of external trust/rating content"
+    ],
+    "notSuitableFor": [
+      "external video embeds with a poster and play affordance (use embed-video)",
+      "self-hosted video files (use the vanilla video block)",
+      "full interactive forms (out of scope; use static links)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/car-insurance"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:30:00.000Z",
+    "notes": "Reused twice on the car-insurance page (Section 3 top Trustpilot banner and Section 14 'Read more about our customer's experiences' widget). Represents the Trustpilot review profile (https://www.trustpilot.com/review/www.admiral.com) as a static embed; live star rating is script-driven and not in the scraped HTML."
+  }
+}

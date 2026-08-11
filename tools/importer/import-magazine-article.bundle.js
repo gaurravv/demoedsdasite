@@ -41,131 +41,316 @@ var CustomImportScript = (() => {
     default: () => import_magazine_article_default
   });
 
-  // tools/importer/transformers/wknd-cleanup.js
+  // tools/importer/parsers/cards-byline.js
+  function parse(element, { document }) {
+    const avatar = element.querySelector(".magazine-story__meta-avatar, img");
+    const author = element.querySelector(".story__meta-author");
+    const date = element.querySelector(".story__meta-date");
+    const shareLinks = Array.from(element.querySelectorAll(".story__social a"));
+    const contentCell = [];
+    if (author) contentCell.push(author);
+    if (date) contentCell.push(date);
+    shareLinks.forEach((a) => contentCell.push(a));
+    if (!avatar && contentCell.length === 0) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const cells = [[avatar || "", contentCell]];
+    const block = WebImporter.Blocks.createBlock(document, { name: "cards-byline", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/cards-bio.js
+  function parse2(element, { document }) {
+    const avatar = element.querySelector(".magazine-story__meta-avatar, .story__expert-meta img, img");
+    const metaHeadings = Array.from(element.querySelectorAll(".story__expert-meta h3, h3"));
+    const paragraphs = Array.from(element.querySelectorAll("p"));
+    const shareLinks = Array.from(element.querySelectorAll(".story__social a"));
+    const contentCell = [];
+    metaHeadings.forEach((h) => contentCell.push(h));
+    paragraphs.forEach((p) => contentCell.push(p));
+    shareLinks.forEach((a) => contentCell.push(a));
+    if (!avatar && contentCell.length === 0) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const cells = [[avatar || "", contentCell]];
+    const block = WebImporter.Blocks.createBlock(document, { name: "cards-bio", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/cards-teaser.js
+  function parse3(element, { document }) {
+    let items = Array.from(
+      element.querySelectorAll(
+        ":scope > .grid__cell .pod, :scope .grid__cell .pod, :scope > a.sub-hero-banner, :scope a.sub-hero-banner.product-pod-style, :scope > a.pod--magazine, :scope a.pod--magazine"
+      )
+    );
+    if (items.length === 0) {
+      if (element.matches("a.sub-hero-banner, .pod, a.pod--magazine")) {
+        items = [element];
+      } else {
+        items = Array.from(element.querySelectorAll(".pod, a.sub-hero-banner, a.pod--magazine"));
+      }
+    }
+    items = items.filter((el, i) => items.indexOf(el) === i);
+    const cells = [];
+    items.forEach((item) => {
+      const cardHref = item.tagName === "A" ? item.getAttribute("href") : null;
+      const image = item.querySelector(".image img, img");
+      const textScope = item.querySelector(".copy") || item;
+      const heading = textScope.querySelector("h2, h3, h4");
+      const time = textScope.querySelector("time");
+      const paragraphs = Array.from(textScope.querySelectorAll("p")).filter((p) => !p.querySelector("time"));
+      const moreLink = item.querySelector("a.more-link, .more-link");
+      const contentCell = [];
+      if (heading) {
+        if (cardHref) {
+          const link = document.createElement("a");
+          link.setAttribute("href", cardHref);
+          const h = document.createElement((heading.tagName || "h3").toLowerCase());
+          link.textContent = heading.textContent.trim();
+          h.append(link);
+          contentCell.push(h);
+        } else {
+          contentCell.push(heading);
+        }
+      }
+      if (time) {
+        const p = document.createElement("p");
+        p.textContent = time.textContent.trim();
+        contentCell.push(p);
+      }
+      paragraphs.forEach((p) => contentCell.push(p));
+      if (moreLink && !cardHref) contentCell.push(moreLink);
+      if (!image && contentCell.length === 0) return;
+      cells.push([image || "", contentCell]);
+    });
+    if (cells.length === 0) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const block = WebImporter.Blocks.createBlock(document, { name: "cards-teaser", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/hero-callout.js
+  function parse4(element, { document }) {
+    const image = element.querySelector(".image img, .hero-banner__image img") || element.querySelector(":scope > img") || element.querySelector("img");
+    const copy = element.querySelector(".copy, .hero-banner__copy, .hero-background") || element;
+    const headings = Array.from(copy.querySelectorAll("h1, h2, h3"));
+    const paragraphs = Array.from(copy.querySelectorAll("p")).filter((p) => !p.closest(".buttons, .buttons__flex, .app-icons"));
+    const ctaLinks = Array.from(
+      copy.querySelectorAll("a.button, .buttons a, .buttons__flex a, .app-icons a")
+    );
+    if (headings.length === 0 && paragraphs.length === 0) {
+      element.replaceWith(...element.childNodes);
+      return;
+    }
+    const cells = [];
+    if (image) cells.push([image]);
+    const contentCell = [];
+    headings.forEach((h) => contentCell.push(h));
+    paragraphs.forEach((p) => contentCell.push(p));
+    ctaLinks.forEach((a) => contentCell.push(a));
+    cells.push([contentCell]);
+    const block = WebImporter.Blocks.createBlock(document, { name: "hero-callout", cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/transformers/admiral-cleanup.js
   var TransformHook = {
     beforeTransform: "beforeTransform",
     afterTransform: "afterTransform"
   };
+  var DUPLICATE_CONTENT_SELECTORS = [
+    ".slick-cloned",
+    ".slide-in-content"
+  ];
+  var SITE_CHROME_SELECTORS = [
+    // Cookie consent (TrustArc): icon, banner, and its iframe live under these ids
+    "#teconsent",
+    "#consent-banner",
+    // Emergency messaging bar
+    "#block-emergencymessaging",
+    // Site header / mega-nav
+    "header.main",
+    // Breadcrumbs (container + inner list)
+    "#block-admiral-annie-breadcrumbs",
+    ".breadcrumbs",
+    // Footer
+    "footer",
+    // Genesys chat widgets (contain their own iframes)
+    "#genesys-thirdparty",
+    "#genesys-messenger",
+    // Empty hidden spacer div that sits between breadcrumbs and content root
+    ".hidden"
+  ];
+  var LEFTOVER_SELECTORS = [
+    "script",
+    "style",
+    "noscript",
+    "link"
+  ];
   function transform(hookName, element, payload) {
+    if (hookName === TransformHook.beforeTransform) {
+      const contentRoot = element.querySelector("#block-admiral-annie-content");
+      if (contentRoot) {
+        element.replaceChildren(contentRoot);
+      }
+      WebImporter.DOMUtils.remove(element, SITE_CHROME_SELECTORS);
+      WebImporter.DOMUtils.remove(element, DUPLICATE_CONTENT_SELECTORS);
+    }
     if (hookName === TransformHook.afterTransform) {
-      WebImporter.DOMUtils.remove(element, [
-        // Site header experience fragment (nav + language nav + search)
-        "header.cmp-experiencefragment--header",
-        ".cmp-experiencefragment--header",
-        "header",
-        // Site footer experience fragment
-        "footer.cmp-experiencefragment--footer",
-        ".cmp-experiencefragment--footer",
-        "footer",
-        // Standalone navigation / language navigator / search (if surfaced outside header on any template)
-        ".cmp-navigation--header",
-        "nav.cmp-navigation",
-        ".cmp-languagenavigation--header",
-        "nav.cmp-languagenavigation",
-        ".search.cmp-search--header",
-        "section.cmp-search",
-        // Breadcrumb chrome (Adobe Core Components)
-        ".breadcrumb",
-        ".cmp-breadcrumb",
-        "nav.cmp-breadcrumb",
-        // Share / social sidebar widget
-        ".sharing",
-        ".cmp-sharing"
-      ]);
-      WebImporter.DOMUtils.remove(element, [
-        "noscript",
-        "link",
-        "style"
-      ]);
+      WebImporter.DOMUtils.remove(element, SITE_CHROME_SELECTORS);
+      WebImporter.DOMUtils.remove(element, LEFTOVER_SELECTORS);
     }
   }
 
-  // tools/importer/transformers/wknd-sections.js
+  // tools/importer/transformers/admiral-sections.js
   var TransformHook2 = {
     beforeTransform: "beforeTransform",
     afterTransform: "afterTransform"
   };
-  function findSectionStart(scope, selector) {
-    const selectors = Array.isArray(selector) ? selector : [selector];
-    for (const sel of selectors) {
-      if (!sel) continue;
-      let el = null;
-      try {
-        el = scope.querySelector(sel);
-      } catch (e) {
-        el = null;
-      }
-      if (el) return el;
+  var CONTENT_ROOT_SELECTOR = "#block-admiral-annie-content";
+  function resolveSectionAnchor(el, contentRoot) {
+    if (!contentRoot) return el;
+    let anchor = el;
+    while (anchor.parentElement && anchor.parentElement !== contentRoot && anchor.parentElement.parentElement !== contentRoot) {
+      anchor = anchor.parentElement;
     }
-    return null;
+    return anchor;
+  }
+  function isHr(node) {
+    return node && node.nodeType === 1 && node.tagName === "HR";
   }
   function transform2(hookName, element, payload) {
     if (hookName !== TransformHook2.afterTransform) return;
     const template = payload && payload.template;
-    const sections = template && Array.isArray(template.sections) ? template.sections : [];
-    if (sections.length < 2) return;
-    const doc = element.ownerDocument;
-    for (let i = sections.length - 1; i >= 0; i -= 1) {
-      const section = sections[i];
-      const start = findSectionStart(element, section.selector);
-      if (!start) continue;
-      if (section.style) {
-        const metaBlock = WebImporter.Blocks.createBlock(doc, {
-          name: "Section Metadata",
-          cells: { style: section.style }
+    if (!template || !Array.isArray(template.blocks)) return;
+    const doc = payload && payload.document || element.ownerDocument;
+    const contentRoot = element.querySelector(CONTENT_ROOT_SELECTOR);
+    const seen = /* @__PURE__ */ new Set();
+    const targets = [];
+    template.blocks.filter((block) => block && block.section && Array.isArray(block.instances)).forEach((block) => {
+      block.instances.forEach((selector) => {
+        element.querySelectorAll(selector).forEach((el) => {
+          const anchor = resolveSectionAnchor(el, contentRoot);
+          if (anchor && !seen.has(anchor)) {
+            seen.add(anchor);
+            targets.push({ anchor, style: block.section });
+          }
         });
-        start.parentElement.insertBefore(metaBlock, start.nextSibling);
+      });
+    });
+    if (targets.length === 0) return;
+    targets.sort((a, b) => {
+      const pos = a.anchor.compareDocumentPosition(b.anchor);
+      if (pos & Node.DOCUMENT_POSITION_FOLLOWING) return -1;
+      if (pos & Node.DOCUMENT_POSITION_PRECEDING) return 1;
+      return 0;
+    });
+    for (let i = targets.length - 1; i >= 0; i -= 1) {
+      const { anchor, style } = targets[i];
+      const parent = anchor.parentElement;
+      if (!parent) continue;
+      const sectionMetadata = WebImporter.Blocks.createBlock(doc, {
+        name: "Section Metadata",
+        cells: { Style: style }
+      });
+      anchor.after(sectionMetadata);
+      if (!isHr(sectionMetadata.nextElementSibling)) {
+        sectionMetadata.after(doc.createElement("hr"));
       }
-      if (i > 0) {
-        const hr = doc.createElement("hr");
-        start.parentElement.insertBefore(hr, start);
+      if (anchor.previousElementSibling && !isHr(anchor.previousElementSibling)) {
+        parent.insertBefore(doc.createElement("hr"), anchor);
       }
     }
   }
 
   // tools/importer/import-magazine-article.js
-  var parsers = {};
-  var PAGE_TEMPLATE = {
-    "name": "magazine-article",
-    "description": "Magazine article detail page with title, hero image, and rich article body content.",
-    "urls": [
-      "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/western-australia.html",
-      "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/arctic-surfing.html",
-      "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/san-diego-surf.html",
-      "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/ski-touring.html",
-      "https://publish-p133255-e1921317.adobeaemcloud.com/us/en/magazine/guide-la-skateparks.html"
-    ],
-    "blocks": [],
-    "sections": []
+  var parsers = {
+    "cards-byline": parse,
+    "cards-bio": parse2,
+    "cards-teaser": parse3,
+    "hero-callout": parse4
   };
-  var transformers = [
-    transform,
-    ...PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [transform2] : []
-  ];
+  var transformers = [transform, transform2];
+  var PAGE_TEMPLATE = {
+    name: "magazine-article",
+    description: "Editorial long-form article: title header, article-contents jump list, author byline with share links, hero image, rich-text body with H2 sections, author bio, share block, related-articles cards, and product CTA.",
+    urls: ["https://www.admiral.com/magazine/guides/motor/10-ways-to-make-your-car-last-longer"],
+    blocks: [
+      {
+        "name": "cards-byline",
+        "instances": [
+          ".story__meta"
+        ]
+      },
+      {
+        "name": "cards-bio",
+        "instances": [
+          ".story__expert"
+        ]
+      },
+      {
+        "name": "cards-teaser",
+        "instances": [
+          ".views-element-container .grid"
+        ]
+      },
+      {
+        "name": "hero-callout",
+        "instances": [
+          ".hero-banner"
+        ]
+      }
+    ]
+  };
   function executeTransformers(hookName, element, payload) {
     const enhancedPayload = __spreadProps(__spreadValues({}, payload), { template: PAGE_TEMPLATE });
-    transformers.forEach((transformer) => {
+    transformers.forEach((transformerFn) => {
       try {
-        transformer(hookName, element, enhancedPayload);
+        transformerFn.call(null, hookName, element, enhancedPayload);
       } catch (e) {
-        console.warn(`Transformer failed on hook "${hookName}": ${e.message}`);
+        console.error(`Transformer failed at ${hookName}:`, e);
       }
     });
   }
+  function findBlocksOnPage(document, template) {
+    const pageBlocks = [];
+    template.blocks.forEach((blockDef) => {
+      if (blockDef.name.startsWith("section-")) return;
+      blockDef.instances.forEach((selector) => {
+        const elements = document.querySelectorAll(selector);
+        if (elements.length === 0) {
+          console.warn(`Block "${blockDef.name}" selector not found: ${selector}`);
+        }
+        elements.forEach((element) => {
+          pageBlocks.push({ name: blockDef.name, selector, element });
+        });
+      });
+    });
+    console.log(`Found ${pageBlocks.length} block instances on page`);
+    return pageBlocks;
+  }
   var import_magazine_article_default = {
     transform: (payload) => {
-      const { document, url, html, params } = payload;
+      const { document, url, params } = payload;
       const main = document.body;
       executeTransformers("beforeTransform", main, payload);
-      const pageBlocks = [];
+      const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
       pageBlocks.forEach((block) => {
-        if (!block.element.parentNode) {
-          return;
-        }
-        try {
-          parsers[block.name](block.element, { document, url, params });
-        } catch (e) {
-          console.warn(`Parser "${block.name}" failed: ${e.message}`);
+        if (!block.element.parentNode) return;
+        const parser = parsers[block.name];
+        if (parser) {
+          try {
+            parser(block.element, { document, url, params });
+          } catch (e) {
+            console.error(`Failed to parse ${block.name} (${block.selector}):`, e);
+          }
+        } else {
+          console.warn(`No parser found for block: ${block.name}`);
         }
       });
       executeTransformers("afterTransform", main, payload);
@@ -174,9 +359,8 @@ var CustomImportScript = (() => {
       WebImporter.rules.createMetadata(main, document);
       WebImporter.rules.transformBackgroundImages(main, document);
       WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
-      const path = WebImporter.FileUtils.sanitizePath(
-        new URL(params.originalURL).pathname.replace(/\/$/, "").replace(/\.html$/, "")
-      );
+      const rawPath = new URL(params.originalURL).pathname.replace(/\/$/, "").replace(/\.html?$/, "");
+      const path = WebImporter.FileUtils.sanitizePath(rawPath === "" ? "/index" : rawPath);
       return [{
         element: main,
         path,

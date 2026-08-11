@@ -1,0 +1,40 @@
+{
+  "variantName": "hero-award",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-10T12:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/",
+    "originPage": "Admiral homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "compact",
+    "purpose": "award",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "full-width dark band: award badge image beside a heading + supporting paragraph (no CTA)",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "full-width dark brand/award banners with a badge image beside heading + text",
+      "recognition / accolade strips ('Best X for N years') with no call-to-action",
+      "edge-to-edge dark promotional bands emphasising a single message + badge"
+    ],
+    "notSuitableFor": [
+      "coloured callout promos that include a CTA (use hero-callout)",
+      "full-bleed photo hero at the top of the page (use hero-promo)",
+      "repeating item grids (use cards)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T12:18:00.000Z",
+    "notes": "Admiral homepage awards banner (custom-banner dark-blue): 'Personal Finance Awards 2025/26 Best Motor Insurance' badge beside heading 'May the Best Motor Insurer win... oh wait, that's us again!' and a supporting paragraph. Dark full-bleed band, no CTA."
+  }
+}

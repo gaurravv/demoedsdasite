@@ -2,29 +2,44 @@
 /* global WebImporter */
 /**
  * Parser for accordion-faq. Base: accordion.
- * Source: https://publish-p133255-e1921317.adobeaemcloud.com/us/en/faqs.html
- * Structure: 2 columns. First row = block name. Each subsequent row is an accordion
- * item: [title | content].
- * Note: appears on faqs.html (coverage gap); about-us.html has no accordion.
+ * Source: admiral.com FAQ accordions (.faqs) — car-insurance (multiple instances per page).
+ * Each item is .pod.pod--faq with an H3 question (.js-toggle-content) and a .hide answer container.
+ * Library convention: Accordion = 2 columns (title | content), one row per item.
+ *   Cell 1: question header.
+ *   Cell 2: answer content (paragraphs, lists, etc.).
  */
 export default function parse(element, { document }) {
-  const items = Array.from(element.querySelectorAll('.cmp-accordion__item'));
+  let items = Array.from(element.querySelectorAll(':scope > .pod--faq, :scope .pod--faq, :scope > .pod'));
+  if (items.length === 0) {
+    items = element.matches('.pod--faq, .pod') ? [element] : Array.from(element.querySelectorAll('.pod'));
+  }
+  items = items.filter((el, i) => items.indexOf(el) === i);
+
   const cells = [];
-
   items.forEach((item) => {
-    // Title: prefer the dedicated title span, fall back to header/button text.
-    const titleEl = item.querySelector('.cmp-accordion__title, .cmp-accordion__header, h3, h4, [class*="title"]');
-    // Content: the expandable panel body. Prefer inner rich text, fall back to panel.
-    const contentEl = item.querySelector('.cmp-accordion__panel .cmp-text, .cmp-accordion__panel .text, .cmp-accordion__panel, [class*="panel"]');
+    const question = item.querySelector('.js-toggle-content, h2, h3, h4');
+    // Answer body: the .hide container's inner content, else everything after the heading.
+    const answerWrap = item.querySelector('.hide');
 
-    if (!titleEl && !contentEl) return;
+    let answerContent = [];
+    if (answerWrap) {
+      // Use the inner wrapper's children if it has a single content div, else the wrapper itself.
+      const inner = answerWrap.querySelector(':scope > div') || answerWrap;
+      answerContent = Array.from(inner.childNodes);
+    } else {
+      // Fallback: siblings of the question inside the item.
+      answerContent = Array.from(item.children).filter(
+        (c) => c !== question && !c.classList.contains('hide-toggle'),
+      );
+    }
 
-    const titleCell = titleEl ? titleEl.textContent.trim() : '';
-    const contentCell = contentEl || '';
-    cells.push([titleCell, contentCell]);
+    if (!question && answerContent.length === 0) return;
+
+    const questionCell = question || '';
+    const answerCell = answerContent.length ? answerContent : '';
+    cells.push([questionCell, answerCell]);
   });
 
-  // Empty-block guard: nothing extracted.
   if (cells.length === 0) {
     element.replaceWith(...element.childNodes);
     return;

@@ -1,0 +1,41 @@
+{
+  "variantName": "cards-feature",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:30:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/car-insurance",
+    "originPage": "Car insurance landing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "accent",
+    "density": "grid",
+    "purpose": "feature",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "stat heading + short description (text-only tile, no image, no link)",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "cardCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "text-only feature/benefit/stat tiles ('Why choose us' style grids)",
+      "3-up coloured highlight panels with a bold stat heading + supporting sentence",
+      "uniform benefit callouts with no image and no per-card CTA"
+    ],
+    "notSuitableFor": [
+      "photo teaser cards with image + title + description + read link (use cards-teaser)",
+      "icon + short label product/category link grids (use cards-product)",
+      "people/team grids (use cards-team)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/car-insurance"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:30:00.000Z",
+    "notes": "Car-insurance 'Why choose Admiral Car Insurance?' section: three dark-blue rounded stat tiles (We accept 98.9% of claims / Over 5 million vehicles covered / The Best Motor Insurer). Text-only cards - no images, no per-card links."
+  }
+}

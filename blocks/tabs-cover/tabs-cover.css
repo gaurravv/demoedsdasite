@@ -1,0 +1,162 @@
+/* Block: tabs-cover — segmented two-tab "cover" toggle (Admiral car-insurance).
+   Values extracted from admiral.com computed styles (#basic-15950 .tabs-nav / .tab-content-wrap).
+   Folder-tab metaphor: active tab is white and merges into the white panel card below;
+   inactive tab is grey. Tab labels use the Admiral link blue. */
+
+/* ---- Tab list (decorated as .tabs-cover-list[role=tablist]) ---- */
+.tabs-cover .tabs-cover-list {
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Tab buttons (reset EDS global button styling, then apply source look) ---- */
+.tabs-cover .tabs-cover-list button {
+  box-sizing: border-box;
+  flex: 1 1 0;
+  margin: 0;
+  border: 1px solid #bdbdbd;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 14px;
+  background-color: #dbdbdb;
+  color: var(--link-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  text-overflow: clip;
+  white-space: normal;
+  overflow: visible;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+@media (width >= 900px) {
+  .tabs-cover .tabs-cover-list button {
+    padding: 11px 20px;
+    font-size: var(--body-font-size-m);
+  }
+}
+
+.tabs-cover .tabs-cover-list button p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.tabs-cover .tabs-cover-list button:hover,
+.tabs-cover .tabs-cover-list button:focus {
+  background-color: #eaeae7;
+  color: var(--link-color);
+}
+
+/* Active tab: white, merges into the white panel card below */
+.tabs-cover .tabs-cover-list button[aria-selected='true'],
+.tabs-cover .tabs-cover-list button[aria-selected='true']:hover {
+  z-index: 2;
+  background-color: #fff;
+  color: var(--link-color);
+  cursor: default;
+}
+
+/* ---- Panel card (decorated as .tabs-cover-panel[role=tabpanel]) ---- */
+.tabs-cover .tabs-cover-panel {
+  margin-top: -1px;
+  border: 1px solid #bdbdbd;
+  border-radius: 0 0 10px 10px;
+  padding: 16px;
+  background-color: #fff;
+  overflow-x: auto;
+}
+
+@media (width >= 900px) {
+  .tabs-cover .tabs-cover-panel {
+    padding: 24px;
+  }
+}
+
+.tabs-cover .tabs-cover-panel[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs-cover .tabs-cover-panel > div {
+  max-width: 100%;
+}
+
+/* Intro copy that lands inside the comprehensive panel */
+.tabs-cover .tabs-cover-panel > div > h2,
+.tabs-cover .tabs-cover-panel > div > p {
+  text-align: center;
+}
+
+.tabs-cover .tabs-cover-panel > div > h2 {
+  margin-top: 0;
+}
+
+/* ---- Comparison table (raw <table>, styled here since table-compare.css
+        does not match this un-wrapped markup) ---- */
+.tabs-cover .tabs-cover-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .tabs-cover .tabs-cover-panel table {
+    font-size: var(--body-font-size-s);
+  }
+}
+
+/* First (thead) row is a "Table Compare" import artifact — hide it */
+.tabs-cover .tabs-cover-panel table thead {
+  display: none;
+}
+
+.tabs-cover .tabs-cover-panel table th,
+.tabs-cover .tabs-cover-panel table td {
+  padding: 12px 8px;
+  border: 1px solid #a0a0b4;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Row-label column: left-aligned, brand-blue heading text */
+.tabs-cover .tabs-cover-panel table td:first-child {
+  text-align: left;
+  font-weight: 700;
+}
+
+.tabs-cover .tabs-cover-panel table td h3 {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--link-color);
+}
+
+@media (width >= 900px) {
+  .tabs-cover .tabs-cover-panel table td h3 {
+    font-size: var(--body-font-size-m);
+  }
+}
+
+/* First body row = the Admiral Platinum/Gold/… column headers */
+.tabs-cover .tabs-cover-panel table tbody tr:first-child td {
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.tabs-cover .tabs-cover-panel table td p {
+  margin: 0;
+}
+
+.tabs-cover .tabs-cover-panel table td p + p {
+  margin-top: 2px;
+}

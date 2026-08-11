@@ -32,8 +32,9 @@
     ]
   },
   "usage": {
-    "pagesUsing": ["/us/en/faqs"],
-    "reuseCount": 1,
-    "lastUsed": "2026-07-24T00:00:00.000Z"
+    "pagesUsing": ["/us/en/faqs", "/car-insurance"],
+    "reuseCount": 2,
+    "lastUsed": "2026-08-10T13:30:00.000Z",
+    "notes": "Reused four times on the Admiral car-insurance page: cover-type accordion (#basic-18610, 3 items), quote-requirements accordion (#basic-17125, 3 items), 'Still got questions?' FAQ (#basic-18935, 7 items), and the single 'Our data' disclosure (#basic-18938, 1 item). All use the same closed-by-default question-summary + collapsible-answer mechanism."
   }
 }

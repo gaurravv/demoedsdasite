@@ -1,0 +1,110 @@
+/* Block: hero-callout — Admiral "sub-hero-banner" promo.
+   Two variants share one block:
+   - .no-image : light ice-blue rounded box with a single gradient pill CTA
+   - .app      : blue banner, white copy, app-store badge links
+   Values extracted from admiral.com computed styles. */
+
+.hero-callout {
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 18px 20px;
+}
+
+.hero-callout h3 {
+  margin: 0 0 8px;
+  font-size: 25.2px;
+  font-weight: 600;
+  line-height: 34px;
+}
+
+.hero-callout p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 28px;
+}
+
+/* ---------------- Light ice-blue rounded-box variant (scam warning) ---------------- */
+.hero-callout.no-image {
+  background-color: var(--section-accent-light-bg); /* #bbeeff */
+}
+
+.hero-callout.no-image h3,
+.hero-callout.no-image p {
+  color: var(--brand-blue); /* #005485 */
+}
+
+/* Gradient pill CTA (overrides global a.button treatment) */
+main .hero-callout.no-image a.button:any-link {
+  display: inline-block;
+  max-width: none;
+  margin: 14px 0 4px;
+  padding: 0 16px;
+  border: 1px solid #0080c2;
+  border-radius: 4px;
+  background: linear-gradient(#00b8ea 0%, #0080cc 100%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main .hero-callout.no-image a.button:any-link:hover,
+main .hero-callout.no-image a.button:any-link:focus {
+  background: linear-gradient(#0080cc 0%, #00b8ea 100%);
+  color: #fff;
+}
+
+/* ---------------- Blue app-download banner variant ---------------- */
+.hero-callout.app {
+  padding: 24px 30px;
+  background-color: var(--sub-hero-blue); /* #0c3a84 */
+}
+
+.hero-callout.app h3 {
+  color: #fff;
+}
+
+.hero-callout.app p {
+  color: #82c8ff; /* rgb(130, 200, 255) — light accent blue */
+}
+
+.hero-callout.app .app-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Reset the auto-decorated button styling on badge links */
+main .hero-callout.app .app-badges a:any-link {
+  display: inline-block;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  line-height: 0;
+}
+
+.hero-callout.app .app-badges a:hover {
+  text-decoration: none;
+}
+
+.hero-callout.app .app-badges img {
+  height: 52px;
+  width: auto;
+  max-width: none;
+}
+
+@media (width >= 900px) {
+  .hero-callout.app {
+    padding: 28px 40px;
+  }
+}

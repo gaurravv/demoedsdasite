@@ -1,0 +1,92 @@
+/* Block: hero-award — full-bleed dark navy award banner.
+   Source: admiral.com .custom-banner.dark-blue
+   Layout: award badge (left) + white copy (right), centered; stacks on mobile.
+   Values (colors, type, spacing) extracted from source computed styles. */
+
+/* Full-bleed: escape the section's 1200px max-width + side padding so the
+   dark band runs edge-to-edge while sibling blocks stay contained. */
+.hero-award-container .hero-award-wrapper {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Full-width dark navy band (#091f30). */
+.hero-award {
+  background-color: var(--dark-color);
+}
+
+/* Inner content row: constrained + centered inside the full-bleed band.
+   Mobile-first — badge stacks above copy, everything centered. */
+.hero-award > div {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1024px;
+  min-height: 240px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Copy cell */
+.hero-award > div > div {
+  text-align: center;
+}
+
+/* Heading — white, matches source .heading-small. */
+.hero-award h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+/* Supporting paragraph — Admiral light-blue (rgb 130 200 255). */
+.hero-award p {
+  margin: 12px 0 0;
+  color: rgb(130 200 255);
+  font-size: 14.4px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+/* Optional award badge image (left column when authored). Sized to the
+   source badge; contained so it never overflows. Harmless when absent. */
+.hero-award picture,
+.hero-award img {
+  display: block;
+  width: auto;
+  max-width: 278px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+@media (width >= 900px) {
+  .hero-award > div {
+    flex-direction: row;
+    gap: 40px;
+    min-height: 300px;
+    padding: 40px 30px;
+  }
+
+  .hero-award h2 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .hero-award p {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .hero-award picture,
+  .hero-award img {
+    max-width: 386px;
+  }
+}

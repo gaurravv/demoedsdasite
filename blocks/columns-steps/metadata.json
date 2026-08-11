@@ -1,0 +1,41 @@
+{
+  "variantName": "columns-steps",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-08-10T13:30:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.admiral.com/car-insurance",
+    "originPage": "Car insurance landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "steps",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "N side-by-side step columns, each = numbered step-badge image + heading + description",
+    "buttonCount": 0,
+    "imageCount": 3,
+    "columnCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "numbered process / how-to steps laid out side-by-side (Step 1 / Step 2 / Step 3)",
+      "'how to make a claim' style step columns with a badge image + title + description per step",
+      "equal-width instructional columns each led by an icon/badge"
+    ],
+    "notSuitableFor": [
+      "label/value specification sheets (use columns-spec)",
+      "repeating image + title + description teaser items linking to detail pages (use cards-teaser)",
+      "free-form two-column rich content (use the vanilla columns pattern)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/car-insurance"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T13:30:00.000Z",
+    "notes": "Car-insurance 'How to make a claim' section (#basic-18933): 3 side-by-side steps, each with a lightblue step-number badge image (badge-step-lightblue-01/02/03), an H3 title and a short description. Step 3 contains a 'Make a claim' link and a MyAccount link."
+  }
+}
