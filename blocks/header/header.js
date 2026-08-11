@@ -176,10 +176,18 @@ async function buildBreadcrumbs() {
  * @param {Element} navSection A top-level nav <li>
  */
 function wrapDropLabel(navSection) {
+  if (navSection.querySelector(':scope > .nav-drop-label')) return; // already wrapped
+  const span = document.createElement('span');
+  span.className = 'nav-drop-label';
+  // Leading label may be a bare text node ("Motor") or, once the DA/EDS markup
+  // pipeline wraps loose text, a leading <p> ("<p>Motor</p>"). Handle both.
+  const firstEl = navSection.firstElementChild;
   const firstNode = navSection.firstChild;
-  if (firstNode && firstNode.nodeType === Node.TEXT_NODE && firstNode.textContent.trim()) {
-    const span = document.createElement('span');
-    span.className = 'nav-drop-label';
+  if (firstEl && firstEl.tagName === 'P' && firstEl.textContent.trim()
+      && !firstEl.querySelector('a')) {
+    span.textContent = firstEl.textContent.trim();
+    navSection.replaceChild(span, firstEl);
+  } else if (firstNode && firstNode.nodeType === Node.TEXT_NODE && firstNode.textContent.trim()) {
     span.textContent = firstNode.textContent.trim();
     navSection.replaceChild(span, firstNode);
   }
